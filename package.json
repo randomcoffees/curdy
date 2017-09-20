@@ -1,0 +1,25 @@
+{
+  "name": "curddy",
+  "version": "0.0.1",
+  "description": "Generate CRUD controllers for your express application!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hubba/curddy.git"
+  },
+  "keywords": [
+    "crud",
+    "express",
+    "node",
+    "controller"
+  ],
+  "author": "Edward Andrew Robinson <earobinson@hubba.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hubba/curddy/issues"
+  },
+  "homepage": "https://github.com/hubba/curddy#readme"
+}
