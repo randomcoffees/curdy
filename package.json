@@ -4,7 +4,8 @@
   "description": "Generate CRUD controllers for your express application!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha -R spec --recursive \"./spec/**/*.spec.js\"",
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,20 @@
   "bugs": {
     "url": "https://github.com/hubba/curddy/issues"
   },
-  "homepage": "https://github.com/hubba/curddy#readme"
+  "homepage": "https://github.com/hubba/curddy#readme",
+  "devDependencies": {
+    "body-parser": "^1.17.2",
+    "chai": "^4.1.0",
+    "eslint": "^4.2.0",
+    "mocha": "^3.4.2",
+    "mockgoose": "^7.3.3",
+    "mongoose": "^4.11.3",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "jyson": "^1.1.0",
+    "q": "^1.5.0"
+  }
 }
