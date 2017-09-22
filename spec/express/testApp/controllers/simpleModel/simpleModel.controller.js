@@ -8,7 +8,7 @@ module.exports = curddy.generateController(
     find: { // Find Template
       _id: 'params._id'
     },
-    crud: { // Crud Template
+    operation: { // Operation Template
       string: 'body.string',
       number: 'body.number',
       boolean: 'body.boolean'

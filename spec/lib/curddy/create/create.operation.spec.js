@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.crud.create', () => {
+describe('curddy.create.operation', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,7 +21,7 @@ describe('curddy.crud.create', () => {
           timestamps: false,
         }));
 
-        this.create = curddy.crud.create(
+        this.create = curddy.create.operation(
           this.SimpleModel,
           'simpleModel',
           {

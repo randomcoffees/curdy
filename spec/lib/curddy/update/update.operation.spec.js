@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.crud.update', () => {
+describe('curddy.update.operation', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,7 +21,7 @@ describe('curddy.crud.update', () => {
           timestamps: false,
         }));
 
-        this.update = curddy.crud.update(
+        this.update = curddy.update.operation(
           this.SimpleModel,
           'simpleModel',
           {
@@ -117,7 +117,7 @@ describe('curddy.crud.update', () => {
           timestamps: false,
         }));
 
-        this.update = curddy.crud.update(
+        this.update = curddy.update.operation(
           this.NestedModel,
           'nestedModel',
           {

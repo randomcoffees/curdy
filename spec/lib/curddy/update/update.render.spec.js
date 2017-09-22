@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.render.update', () => {
+describe('curddy.update.render', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,7 +21,7 @@ describe('curddy.render.update', () => {
           timestamps: false,
         }));
 
-        this.update = curddy.render.update(
+        this.update = curddy.update.render(
           this.SimpleModel,
           'simpleModel',
           {

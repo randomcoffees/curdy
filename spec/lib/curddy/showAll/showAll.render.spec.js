@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.find.update', () => {
+describe('curddy.showAll.render', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,11 +21,13 @@ describe('curddy.find.update', () => {
           timestamps: false,
         }));
 
-        this.update = curddy.find.update(
+        this.showAll = curddy.showAll.render(
           this.SimpleModel,
-          'simpleModel',
+          'simpleModels',
           {
-            _id: 'params._id'
+            string: 'string',
+            number: 'number',
+            boolean: 'boolean'
           }
         );
       })
@@ -39,22 +41,25 @@ describe('curddy.find.update', () => {
       })
       .then(simpleModel => {
         this.simpleModel = simpleModel;
+        this.res = {
+          json: Q.when
+        };
       });
     });
 
-    it('must find', () => {
+    it('must render', () => {
       const req = {
-        params: {
-          _id: this.simpleModel._id.toString()
-        }
+        simpleModels: [this.simpleModel, this.simpleModel],
       };
 
-      return this.update(req, null, Q.when)
-      .then(() => {
-        expect(req.simpleModel._id.toString()).to.equal(this.simpleModel._id.toString());
-        expect(req.simpleModel.string).to.equal(this.simpleModel.string);
-        expect(req.simpleModel.number).to.equal(this.simpleModel.number);
-        expect(req.simpleModel.boolean).to.equal(this.simpleModel.boolean);
+      return this.showAll(req, this.res)
+      .then(json => {
+        expect(json[0].string).to.equal(this.simpleModel.string);
+        expect(json[0].number).to.equal(this.simpleModel.number);
+        expect(json[0].boolean).to.equal(this.simpleModel.boolean);
+        expect(json[1].string).to.equal(this.simpleModel.string);
+        expect(json[1].number).to.equal(this.simpleModel.number);
+        expect(json[1].boolean).to.equal(this.simpleModel.boolean);
       });
     });
   });

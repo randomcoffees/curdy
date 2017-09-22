@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.render.showAll', () => {
+describe('curddy.create.render', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,9 +21,9 @@ describe('curddy.render.showAll', () => {
           timestamps: false,
         }));
 
-        this.showAll = curddy.render.showAll(
+        this.create = curddy.create.render(
           this.SimpleModel,
-          'simpleModels',
+          'simpleModel',
           {
             string: 'string',
             number: 'number',
@@ -42,6 +42,7 @@ describe('curddy.render.showAll', () => {
       .then(simpleModel => {
         this.simpleModel = simpleModel;
         this.res = {
+          status: () => {return this.res;},
           json: Q.when
         };
       });
@@ -49,17 +50,14 @@ describe('curddy.render.showAll', () => {
 
     it('must render', () => {
       const req = {
-        simpleModels: [this.simpleModel, this.simpleModel],
+        simpleModel: this.simpleModel,
       };
 
-      return this.showAll(req, this.res)
+      return this.create(req, this.res)
       .then(json => {
-        expect(json[0].string).to.equal(this.simpleModel.string);
-        expect(json[0].number).to.equal(this.simpleModel.number);
-        expect(json[0].boolean).to.equal(this.simpleModel.boolean);
-        expect(json[1].string).to.equal(this.simpleModel.string);
-        expect(json[1].number).to.equal(this.simpleModel.number);
-        expect(json[1].boolean).to.equal(this.simpleModel.boolean);
+        expect(json.string).to.equal(this.simpleModel.string);
+        expect(json.number).to.equal(this.simpleModel.number);
+        expect(json.boolean).to.equal(this.simpleModel.boolean);
       });
     });
   });
