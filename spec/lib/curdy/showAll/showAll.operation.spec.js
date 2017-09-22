@@ -3,9 +3,9 @@ require('./../../../helpers');
 const Q = require('q');
 const mongoose = require('mongoose');
 
-const curddy = require('./../../../../lib/curddy');
+const curdy = require('./../../../../lib/curdy');
 
-describe('curddy.show.operation', () => {
+describe('curdy.showAll.operation', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -19,7 +19,7 @@ describe('curddy.show.operation', () => {
           timestamps: false,
         }));
 
-        this.show = curddy.show.operation(
+        this.showAll = curdy.showAll.operation(
           this.SimpleModel,
           'simpleModel',
           {
@@ -42,12 +42,12 @@ describe('curddy.show.operation', () => {
       });
     });
 
-    it('must show a simple model (and do nothing)', () => {
+    it('must index a simple model (and do nothing)', () => {
       const req = {
         simpleModel: this.simpleModel
       };
 
-      return this.show(req, null, Q.when);
+      return this.showAll(req, null, Q.when);
     });
   });
 });

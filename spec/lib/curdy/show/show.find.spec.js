@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curddy = require('./../../../../lib/curddy');
+const curdy = require('./../../../../lib/curdy');
 
-describe('curddy.delete.find', () => {
+describe('curdy.show.find', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,7 +21,7 @@ describe('curddy.delete.find', () => {
           timestamps: false,
         }));
 
-        this.delete = curddy.delete.find(
+        this.show = curdy.show.find(
           this.SimpleModel,
           'simpleModel',
           {
@@ -52,9 +52,42 @@ describe('curddy.delete.find', () => {
         }
       };
 
-      return this.delete(req, this.res)
+      return this.show(req, this.res)
       .then(() => {
         expect(req.simpleModel._id.toString()).to.equal(this.simpleModel._id.toString());
+      });
+    });
+
+    describe('errors', () => {
+      it('must handle bad mongoose ids', () => {
+        const req = {
+          params: {
+            _id: '404MePlease'
+          }
+        };
+
+        return this.show(req, null, Q.when)
+        .then((err) => {
+          expect(err.name).to.equal('CastError');
+        });
+      });
+
+      it('must call next with an error when the model is not found', () => {
+        const req = {
+          params: {
+            _id: new mongoose.Types.ObjectId()
+          }
+        };
+
+        return this.show(req, null, Q.when)
+        .then((err) => {
+          expect(err).to.deep.equal({
+            message: `${this.SimpleModel.modelName} not found`,
+            name: 'NotFound',
+            code: 404,
+            modelName: this.SimpleModel.modelName
+          });
+        });
       });
     });
   });

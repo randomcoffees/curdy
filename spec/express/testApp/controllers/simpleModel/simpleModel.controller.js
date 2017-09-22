@@ -1,7 +1,7 @@
-const curddy = require('./../../../../../index');
+const curdy = require('./../../../../../index');
 const SimpleModel = require('./simpleModel.model');
 
-module.exports = curddy.generateController(
+module.exports = curdy.generateController(
   SimpleModel, // Model
   'simpleModel', // Model name
   {

@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curddy = require('./../../../../lib/curddy');
+const curdy = require('./../../../../lib/curdy');
 
-describe('curddy.delete.operation', () => {
+describe('curdy.update.find', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,13 +21,11 @@ describe('curddy.delete.operation', () => {
           timestamps: false,
         }));
 
-        this.delete = curddy.delete.operation(
+        this.update = curdy.update.find(
           this.SimpleModel,
           'simpleModel',
           {
-            string: 'body.string',
-            number: 'params.number',
-            boolean: 'otherRequestObjects.boolean'
+            _id: 'params._id'
           }
         );
       })
@@ -44,17 +42,19 @@ describe('curddy.delete.operation', () => {
       });
     });
 
-    it('must delete a simple model', () => {
+    it('must find', () => {
       const req = {
-        simpleModel: this.simpleModel
+        params: {
+          _id: this.simpleModel._id.toString()
+        }
       };
 
-      return this.delete(req, null, Q.when)
+      return this.update(req, null, Q.when)
       .then(() => {
-        return this.SimpleModel.count({_id: this.simpleModel._id});
-      })
-      .then(simpleModelCount => {
-        expect(simpleModelCount).to.equal(0);
+        expect(req.simpleModel._id.toString()).to.equal(this.simpleModel._id.toString());
+        expect(req.simpleModel.string).to.equal(this.simpleModel.string);
+        expect(req.simpleModel.number).to.equal(this.simpleModel.number);
+        expect(req.simpleModel.boolean).to.equal(this.simpleModel.boolean);
       });
     });
   });

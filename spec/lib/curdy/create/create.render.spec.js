@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curddy = require('./../../../../lib/curddy');
+const curdy = require('./../../../../lib/curdy');
 
-describe('curddy.show.render', () => {
+describe('curdy.create.render', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,7 +21,7 @@ describe('curddy.show.render', () => {
           timestamps: false,
         }));
 
-        this.show = curddy.show.render(
+        this.create = curdy.create.render(
           this.SimpleModel,
           'simpleModel',
           {
@@ -42,9 +42,7 @@ describe('curddy.show.render', () => {
       .then(simpleModel => {
         this.simpleModel = simpleModel;
         this.res = {
-          status: () => {
-            return this.res;
-          },
+          status: () => {return this.res;},
           json: Q.when
         };
       });
@@ -55,7 +53,7 @@ describe('curddy.show.render', () => {
         simpleModel: this.simpleModel,
       };
 
-      return this.show(req, this.res)
+      return this.create(req, this.res)
       .then(json => {
         expect(json.string).to.equal(this.simpleModel.string);
         expect(json.number).to.equal(this.simpleModel.number);

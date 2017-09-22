@@ -1,5 +1,5 @@
 {
-  "name": "curddy",
+  "name": "curdy",
   "version": "1.0.0",
   "description": "Generate CRUD controllers for your express application!",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hubba/curddy.git"
+    "url": "git+https://github.com/hubba/curdy.git"
   },
   "keywords": [
     "crud",
@@ -20,9 +20,9 @@
   "author": "Edward Andrew Robinson <earobinson@hubba.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hubba/curddy/issues"
+    "url": "https://github.com/hubba/curdy/issues"
   },
-  "homepage": "https://github.com/hubba/curddy#readme",
+  "homepage": "https://github.com/hubba/curdy#readme",
   "devDependencies": {
     "body-parser": "^1.17.2",
     "chai": "^4.1.0",

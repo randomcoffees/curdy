@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curddy = require('./../../../../lib/curddy');
+const curdy = require('./../../../../lib/curdy');
 
-describe('curddy.showAll.find', () => {
+describe('curdy.showAll.find', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,7 +21,7 @@ describe('curddy.showAll.find', () => {
           timestamps: false,
         }));
 
-        this.showAll = curddy.showAll.find(
+        this.showAll = curdy.showAll.find(
           this.SimpleModel,
           'simpleModels',
           {}
@@ -80,7 +80,7 @@ describe('curddy.showAll.find', () => {
           timestamps: false,
         }));
 
-        this.showAll = curddy.showAll.find(
+        this.showAll = curdy.showAll.find(
           this.SimpleModel,
           'simpleModels',
           {

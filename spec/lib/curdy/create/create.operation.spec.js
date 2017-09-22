@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curddy = require('./../../../../lib/curddy');
+const curdy = require('./../../../../lib/curdy');
 
-describe('curddy.create.operation', () => {
+describe('curdy.create.operation', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,7 +21,7 @@ describe('curddy.create.operation', () => {
           timestamps: false,
         }));
 
-        this.create = curddy.create.operation(
+        this.create = curdy.create.operation(
           this.SimpleModel,
           'simpleModel',
           {

@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curddy = require('./../../../../lib/curddy');
+const curdy = require('./../../../../lib/curdy');
 
-describe('curddy.delete.render', () => {
+describe('curdy.delete.render', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,7 +21,7 @@ describe('curddy.delete.render', () => {
           timestamps: false,
         }));
 
-        this.delete = curddy.delete.render(
+        this.delete = curdy.delete.render(
           this.SimpleModel,
           'simpleModel',
           {

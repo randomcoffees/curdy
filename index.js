@@ -1,1 +1,1 @@
-module.exports = require('./lib/curddy');
+module.exports = require('./lib/curdy');
