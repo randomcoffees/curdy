@@ -2,12 +2,10 @@ require('./../../../helpers');
 
 const Q = require('q');
 const mongoose = require('mongoose');
-const chai = require('chai');
-const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.render.create', () => {
+describe('curddy.showAll.operation', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,13 +19,13 @@ describe('curddy.render.create', () => {
           timestamps: false,
         }));
 
-        this.create = curddy.render.create(
+        this.showAll = curddy.showAll.operation(
           this.SimpleModel,
           'simpleModel',
           {
-            string: 'string',
-            number: 'number',
-            boolean: 'boolean'
+            string: 'body.string',
+            number: 'params.number',
+            boolean: 'otherRequestObjects.boolean'
           }
         );
       })
@@ -41,24 +39,15 @@ describe('curddy.render.create', () => {
       })
       .then(simpleModel => {
         this.simpleModel = simpleModel;
-        this.res = {
-          status: () => {return this.res;},
-          json: Q.when
-        };
       });
     });
 
-    it('must render', () => {
+    it('must index a simple model (and do nothing)', () => {
       const req = {
-        simpleModel: this.simpleModel,
+        simpleModel: this.simpleModel
       };
 
-      return this.create(req, this.res)
-      .then(json => {
-        expect(json.string).to.equal(this.simpleModel.string);
-        expect(json.number).to.equal(this.simpleModel.number);
-        expect(json.boolean).to.equal(this.simpleModel.boolean);
-      });
+      return this.showAll(req, null, Q.when);
     });
   });
 });

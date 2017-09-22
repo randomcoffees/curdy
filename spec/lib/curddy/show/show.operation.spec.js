@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.crud.showAll', () => {
+describe('curddy.show.operation', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -19,7 +19,7 @@ describe('curddy.crud.showAll', () => {
           timestamps: false,
         }));
 
-        this.showAll = curddy.crud.showAll(
+        this.show = curddy.show.operation(
           this.SimpleModel,
           'simpleModel',
           {
@@ -42,12 +42,12 @@ describe('curddy.crud.showAll', () => {
       });
     });
 
-    it('must index a simple model (and do nothing)', () => {
+    it('must show a simple model (and do nothing)', () => {
       const req = {
         simpleModel: this.simpleModel
       };
 
-      return this.showAll(req, null, Q.when);
+      return this.show(req, null, Q.when);
     });
   });
 });

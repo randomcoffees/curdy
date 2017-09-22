@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.render.delete', () => {
+describe('curddy.show.render', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,11 +21,13 @@ describe('curddy.render.delete', () => {
           timestamps: false,
         }));
 
-        this.delete = curddy.render.delete(
+        this.show = curddy.show.render(
           this.SimpleModel,
           'simpleModel',
           {
-            status: () => { return 'success'; }
+            string: 'string',
+            number: 'number',
+            boolean: 'boolean'
           }
         );
       })
@@ -40,7 +42,9 @@ describe('curddy.render.delete', () => {
       .then(simpleModel => {
         this.simpleModel = simpleModel;
         this.res = {
-          status: () => {return this.res;},
+          status: () => {
+            return this.res;
+          },
           json: Q.when
         };
       });
@@ -51,9 +55,11 @@ describe('curddy.render.delete', () => {
         simpleModel: this.simpleModel,
       };
 
-      return this.delete(req, this.res)
+      return this.show(req, this.res)
       .then(json => {
-        expect(json.status).to.equal('success');
+        expect(json.string).to.equal(this.simpleModel.string);
+        expect(json.number).to.equal(this.simpleModel.number);
+        expect(json.boolean).to.equal(this.simpleModel.boolean);
       });
     });
   });

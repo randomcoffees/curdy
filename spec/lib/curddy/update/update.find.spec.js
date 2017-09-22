@@ -2,10 +2,12 @@ require('./../../../helpers');
 
 const Q = require('q');
 const mongoose = require('mongoose');
+const chai = require('chai');
+const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.crud.show', () => {
+describe('curddy.update.find', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -19,13 +21,11 @@ describe('curddy.crud.show', () => {
           timestamps: false,
         }));
 
-        this.show = curddy.crud.show(
+        this.update = curddy.update.find(
           this.SimpleModel,
           'simpleModel',
           {
-            string: 'body.string',
-            number: 'params.number',
-            boolean: 'otherRequestObjects.boolean'
+            _id: 'params._id'
           }
         );
       })
@@ -42,12 +42,20 @@ describe('curddy.crud.show', () => {
       });
     });
 
-    it('must show a simple model (and do nothing)', () => {
+    it('must find', () => {
       const req = {
-        simpleModel: this.simpleModel
+        params: {
+          _id: this.simpleModel._id.toString()
+        }
       };
 
-      return this.show(req, null, Q.when);
+      return this.update(req, null, Q.when)
+      .then(() => {
+        expect(req.simpleModel._id.toString()).to.equal(this.simpleModel._id.toString());
+        expect(req.simpleModel.string).to.equal(this.simpleModel.string);
+        expect(req.simpleModel.number).to.equal(this.simpleModel.number);
+        expect(req.simpleModel.boolean).to.equal(this.simpleModel.boolean);
+      });
     });
   });
 });

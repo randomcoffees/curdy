@@ -7,7 +7,7 @@ const expect = chai.expect;
 
 const curddy = require('./../../../../lib/curddy');
 
-describe('curddy.crud.delete', () => {
+describe('curddy.delete.render', () => {
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
@@ -21,13 +21,11 @@ describe('curddy.crud.delete', () => {
           timestamps: false,
         }));
 
-        this.delete = curddy.crud.delete(
+        this.delete = curddy.delete.render(
           this.SimpleModel,
           'simpleModel',
           {
-            string: 'body.string',
-            number: 'params.number',
-            boolean: 'otherRequestObjects.boolean'
+            status: () => { return 'success'; }
           }
         );
       })
@@ -41,20 +39,21 @@ describe('curddy.crud.delete', () => {
       })
       .then(simpleModel => {
         this.simpleModel = simpleModel;
+        this.res = {
+          status: () => {return this.res;},
+          json: Q.when
+        };
       });
     });
 
-    it('must delete a simple model', () => {
+    it('must render', () => {
       const req = {
-        simpleModel: this.simpleModel
+        simpleModel: this.simpleModel,
       };
 
-      return this.delete(req, null, Q.when)
-      .then(() => {
-        return this.SimpleModel.count({_id: this.simpleModel._id});
-      })
-      .then(simpleModelCount => {
-        expect(simpleModelCount).to.equal(0);
+      return this.delete(req, this.res)
+      .then(json => {
+        expect(json.status).to.equal('success');
       });
     });
   });
