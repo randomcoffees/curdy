@@ -1,10 +1,11 @@
 const curdy = require('./../../../../../../index');
-const OrderModel = require('./orderedModel.model');
+const PaginationModel = require('./paginationModel.model');
 const OrderByPlugin = require('./../../../../../../plugins/orderBy');
+const PaginationPlugin = require('./../../../../../../plugins/pagination');
 
 module.exports = curdy.generateController(
-  OrderModel,
-  'orderedModel',
+  PaginationModel,
+  'paginationModel',
   {
     find: {
       _id: 'params._id'
@@ -19,7 +20,8 @@ module.exports = curdy.generateController(
       updatedAt: 'updatedAt'
     }
   }
-).plugin(OrderByPlugin, {
+)
+.plugin(OrderByPlugin, {
   sort: ({object}) => {
     if (object.query && object.query.sort) {
       const sort = object.query.sort.split(':');
@@ -27,6 +29,8 @@ module.exports = curdy.generateController(
         [sort[0]]: (sort[1].toLowerCase() === 'asc' ? 1 : -1)
       };
     }
-    return {createdAt: -1};
+    return {createdAt: 1};
   }
-}).controller();
+})
+.plugin(PaginationPlugin)
+.controller();

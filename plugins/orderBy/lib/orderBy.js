@@ -1,3 +1,5 @@
 module.exports = (curdy, options) => {
-  console.log({curdy, options});
+  curdy.showAll.find.getSortTemplate = () => {
+    return options;
+  };
 };

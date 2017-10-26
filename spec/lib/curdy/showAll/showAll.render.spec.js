@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curdy = require('./../../../../lib/curdy');
+const showAll = require('./../../../../lib/showAll');
 
 describe('curdy.showAll.render', () => {
   describe('simple models', () => {
@@ -21,7 +21,7 @@ describe('curdy.showAll.render', () => {
           timestamps: false,
         }));
 
-        this.showAll = curdy.showAll.render(
+        this.showAll = showAll.render.method(
           this.SimpleModel,
           'simpleModels',
           {

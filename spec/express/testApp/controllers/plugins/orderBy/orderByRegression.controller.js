@@ -1,6 +1,6 @@
 const curdy = require('./../../../../../../index');
 const OrderModel = require('./orderedModel.model');
-const OrderByPlugin = require('./../../../../../../plugins/orderBy');
+// const OrderByPlugin = require('./../../../../../../plugins/orderBy');
 
 module.exports = curdy.generateController(
   OrderModel,
@@ -19,10 +19,4 @@ module.exports = curdy.generateController(
       updatedAt: 'updatedAt'
     }
   }
-);
-
-module.exports.plugin(OrderByPlugin, {
-  createdAt: () => {
-    return {createdAt: -1};
-  }
-});
+).controller();

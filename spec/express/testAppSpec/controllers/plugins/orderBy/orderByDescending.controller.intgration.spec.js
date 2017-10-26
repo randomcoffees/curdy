@@ -10,6 +10,7 @@ const BASE_URI = '/plugins/orderBy/descending';
 
 describe('orderByDescending.controller.integration.spec', () => {
   beforeEach(() => {
+    const date = new Date();
     expressIntegrationHelper.beforeEach(this);
 
     this.OrderedModel = require('./../../../../testApp/controllers/plugins/orderBy/orderedModel.model');
@@ -18,22 +19,26 @@ describe('orderByDescending.controller.integration.spec', () => {
     .then(() => {
       return Q.all([
         this.OrderedModel.create({
-          name: 'name'
+          name: 'name',
+          createdAt: date.setSeconds(date.getSeconds() - 1)
         }),
         this.OrderedModel.create({
-          name: 'not name'
+          name: 'not name',
+          createdAt: date.setSeconds(date.getSeconds() - 2)
         }),
         this.OrderedModel.create({
-          name: 'not not name'
+          name: 'not not name',
+          createdAt: date.setSeconds(date.getSeconds() - 3)
         }),
         this.OrderedModel.create({
-          name: 'not not not name'
+          name: 'not not not name',
+          createdAt: date.setSeconds(date.getSeconds() - 4)
         })
       ]);
     })
     .then((orderedModels) => {
       this.orderedModels = orderedModels.sort((firstModel, secondModel) => {
-        return secondModel.createdAt - firstModel.createdAt;
+        return secondModel.createdAt.getTime() - firstModel.createdAt.getTime();
       });
     });
   });
@@ -53,6 +58,93 @@ describe('orderByDescending.controller.integration.spec', () => {
             updatedAt: orderedModel.updatedAt.toISOString(),
           };
         }));
+      });
+    });
+
+    describe('user overriding the sort', () => {
+      it('must allow the user to sort createdAt asc', () => {
+        this.orderedModels.reverse();
+
+        return request(this.app)
+        .get(`${BASE_URI}/?sort=createdAt:asc`)
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.length).to.equal(this.orderedModels.length);
+          expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+            return {
+              _id: orderedModel._id.toString(),
+              name: orderedModel.name,
+              createdAt: orderedModel.createdAt.toISOString(),
+              updatedAt: orderedModel.updatedAt.toISOString(),
+            };
+          }));
+        });
+      });
+
+      it('must allow the user to sort createdAt desc', () => {
+        return request(this.app)
+        .get(`${BASE_URI}/?sort=createdAt:desc`)
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.length).to.equal(this.orderedModels.length);
+          expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+            return {
+              _id: orderedModel._id.toString(),
+              name: orderedModel.name,
+              createdAt: orderedModel.createdAt.toISOString(),
+              updatedAt: orderedModel.updatedAt.toISOString(),
+            };
+          }));
+        });
+      });
+
+      describe('user overriding the sort by a different key', () => {
+        beforeEach(() => {
+          this.orderedModels = this.orderedModels.sort((firstModel, secondModel) => {
+            if (firstModel.name < secondModel.name) {
+              return -1;
+            }
+            if (firstModel.name > secondModel.name) {
+              return 1;
+            }
+            return 0;
+          });
+        });
+
+        it('must allow the user to sort name asc', () => {
+          return request(this.app)
+          .get(`${BASE_URI}/?sort=name:asc`)
+          .expect(200)
+          .then(({ body }) => {
+            expect(body.length).to.equal(this.orderedModels.length);
+            expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+              return {
+                _id: orderedModel._id.toString(),
+                name: orderedModel.name,
+                createdAt: orderedModel.createdAt.toISOString(),
+                updatedAt: orderedModel.updatedAt.toISOString(),
+              };
+            }));
+          });
+        });
+
+        it('must allow the user to sort name desc', () => {
+          this.orderedModels.reverse();
+          return request(this.app)
+          .get(`${BASE_URI}/?sort=name:desc`)
+          .expect(200)
+          .then(({ body }) => {
+            expect(body.length).to.equal(this.orderedModels.length);
+            expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+              return {
+                _id: orderedModel._id.toString(),
+                name: orderedModel.name,
+                createdAt: orderedModel.createdAt.toISOString(),
+                updatedAt: orderedModel.updatedAt.toISOString(),
+              };
+            }));
+          });
+        });
       });
     });
   });

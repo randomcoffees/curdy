@@ -19,10 +19,14 @@ module.exports = curdy.generateController(
       updatedAt: 'updatedAt'
     }
   }
-);
-
-module.exports.plugin(OrderByPlugin, {
-  createdAt: () => {
+).plugin(OrderByPlugin, {
+  sort: ({object}) => {
+    if (object.query && object.query.sort) {
+      const sort = object.query.sort.split(':');
+      return {
+        [sort[0]]: (sort[1].toLowerCase() === 'asc' ? 1 : -1)
+      };
+    }
     return {createdAt: 1};
   }
-});
+}).controller();

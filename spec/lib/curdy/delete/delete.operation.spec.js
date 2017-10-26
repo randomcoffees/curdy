@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curdy = require('./../../../../lib/curdy');
+const _delete = require('./../../../../lib/delete');
 
 describe('curdy.delete.operation', () => {
   describe('simple models', () => {
@@ -21,7 +21,7 @@ describe('curdy.delete.operation', () => {
           timestamps: false,
         }));
 
-        this.delete = curdy.delete.operation(
+        this.delete = _delete.operation.method(
           this.SimpleModel,
           'simpleModel',
           {
