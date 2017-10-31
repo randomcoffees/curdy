@@ -20,4 +20,4 @@ module.exports = curdy.generateController(
       boolean: 'boolean'
     }
   }
-);
+).controller();

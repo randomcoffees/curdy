@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curdy = require('./../../../../lib/curdy');
+const show = require('./../../../../lib/show');
 
 describe('curdy.show.find', () => {
   describe('simple models', () => {
@@ -21,7 +21,7 @@ describe('curdy.show.find', () => {
           timestamps: false,
         }));
 
-        this.show = curdy.show.find(
+        this.show = show.find.method(
           this.SimpleModel,
           'simpleModel',
           {

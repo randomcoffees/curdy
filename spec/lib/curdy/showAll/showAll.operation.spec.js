@@ -3,7 +3,7 @@ require('./../../../helpers');
 const Q = require('q');
 const mongoose = require('mongoose');
 
-const curdy = require('./../../../../lib/curdy');
+const showAll = require('./../../../../lib/showAll');
 
 describe('curdy.showAll.operation', () => {
   describe('simple models', () => {
@@ -19,7 +19,7 @@ describe('curdy.showAll.operation', () => {
           timestamps: false,
         }));
 
-        this.showAll = curdy.showAll.operation(
+        this.showAll = showAll.operation.method(
           this.SimpleModel,
           'simpleModel',
           {

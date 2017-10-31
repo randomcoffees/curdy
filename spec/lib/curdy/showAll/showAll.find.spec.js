@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
-const curdy = require('./../../../../lib/curdy');
+const showAll = require('./../../../../lib/showAll');
 
 describe('curdy.showAll.find', () => {
   describe('simple models', () => {
@@ -21,7 +21,7 @@ describe('curdy.showAll.find', () => {
           timestamps: false,
         }));
 
-        this.showAll = curdy.showAll.find(
+        this.showAll = showAll.find.method(
           this.SimpleModel,
           'simpleModels',
           {}
@@ -61,8 +61,12 @@ describe('curdy.showAll.find', () => {
       return this.showAll(req, this.res)
       .then(() => {
         expect(req.simpleModels.length).to.equal(2);
-        expect(req.simpleModels[0]._id.toString()).to.equal(this.simpleModels[0]._id.toString());
-        expect(req.simpleModels[1]._id.toString()).to.equal(this.simpleModels[1]._id.toString());
+        const simpleModelIds = [
+          req.simpleModels[0]._id.toString(),
+          req.simpleModels[1]._id.toString(),
+        ];
+        expect(simpleModelIds).to.contain(this.simpleModels[0]._id.toString());
+        expect(simpleModelIds).to.contain(this.simpleModels[1]._id.toString());
       });
     });
   });
@@ -80,7 +84,7 @@ describe('curdy.showAll.find', () => {
           timestamps: false,
         }));
 
-        this.showAll = curdy.showAll.find(
+        this.showAll = showAll.find.method(
           this.SimpleModel,
           'simpleModels',
           {
@@ -139,8 +143,12 @@ describe('curdy.showAll.find', () => {
       return this.showAll(req, this.res)
       .then(() => {
         expect(req.simpleModels.length).to.equal(2);
-        expect(req.simpleModels[0]._id.toString()).to.equal(this.simpleModels[0]._id.toString());
-        expect(req.simpleModels[1]._id.toString()).to.equal(this.simpleModels[1]._id.toString());
+        const simpleModelIds = [
+          req.simpleModels[0]._id.toString(),
+          req.simpleModels[1]._id.toString(),
+        ];
+        expect(simpleModelIds).to.contain(this.simpleModels[0]._id.toString());
+        expect(simpleModelIds).to.contain(this.simpleModels[1]._id.toString());
       });
     });
 
@@ -154,10 +162,17 @@ describe('curdy.showAll.find', () => {
       return this.showAll(req, this.res)
       .then(() => {
         expect(req.simpleModels.length).to.equal(4);
-        expect(req.simpleModels[0]._id.toString()).to.equal(this.simpleModels[0]._id.toString());
-        expect(req.simpleModels[1]._id.toString()).to.equal(this.simpleModels[1]._id.toString());
-        expect(req.simpleModels[2]._id.toString()).to.equal(this.simpleModels[2]._id.toString());
-        expect(req.simpleModels[3]._id.toString()).to.equal(this.simpleModels[3]._id.toString());
+
+        const simpleModelIds = [
+          req.simpleModels[0]._id.toString(),
+          req.simpleModels[1]._id.toString(),
+          req.simpleModels[2]._id.toString(),
+          req.simpleModels[3]._id.toString(),
+        ];
+        expect(simpleModelIds).to.contain(this.simpleModels[0]._id.toString());
+        expect(simpleModelIds).to.contain(this.simpleModels[1]._id.toString());
+        expect(simpleModelIds).to.contain(this.simpleModels[2]._id.toString());
+        expect(simpleModelIds).to.contain(this.simpleModels[3]._id.toString());
       });
     });
   });
