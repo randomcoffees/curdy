@@ -1,3 +1,4 @@
+const Q = require('q');
 const mongoose = require('mongoose');
 const Mockgoose = require('mockgoose').Mockgoose;
 const mockgoose = new Mockgoose(mongoose);
@@ -13,7 +14,7 @@ before(() => {
 });
 
 beforeEach(() => {
-  Object.keys(mongoose.connection.models).forEach(modelKey => {
+  return Q.when(Object.keys(mongoose.connection.models).forEach(modelKey => {
     delete mongoose.connection.models[modelKey];
-  });
+  }));
 });
