@@ -14,6 +14,10 @@ before(() => {
   .then(() => {
     console.log(2);
     return Q.when(mongoose.connect('mongodb://example.com/TestingDB'));
+  })
+  .catch(err => {
+    console.log(err);
+    throw err;
   });
 });
 
