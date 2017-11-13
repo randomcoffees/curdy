@@ -6,14 +6,14 @@ console.log(-1);
 
 before(() => {
   console.log(0);
-  return mockgoose.prepareStorage()
+  return Q.when(mockgoose.prepareStorage())
   .then(() => {
     console.log(1);
-    return mongoose.connection.close();
+    return Q.when(mongoose.connection.close());
   })
   .then(() => {
     console.log(2);
-    return mongoose.connect('mongodb://example.com/TestingDB');
+    return Q.when(mongoose.connect('mongodb://example.com/TestingDB'));
   });
 });
 
