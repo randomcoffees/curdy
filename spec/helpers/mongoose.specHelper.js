@@ -6,19 +6,24 @@ console.log(-1);
 
 before(() => {
   console.log(0);
-  return Q.when(mockgoose.prepareStorage())
-  .then(() => {
-    console.log(1);
-    return Q.when(mongoose.connection.close());
-  })
-  .then(() => {
-    console.log(2);
-    return Q.when(mongoose.connect('mongodb://example.com/TestingDB'));
-  })
-  .catch(err => {
+  try {
+    return Q.when(mockgoose.prepareStorage())
+    .then(() => {
+      console.log(1);
+      return Q.when(mongoose.connection.close());
+    })
+    .then(() => {
+      console.log(2);
+      return Q.when(mongoose.connect('mongodb://example.com/TestingDB'));
+    })
+    .catch(err => {
+      console.log(err);
+      throw err;
+    });
+  } catch(err) {
     console.log(err);
     throw err;
-  });
+  }
 });
 
 beforeEach(() => {

@@ -4,7 +4,7 @@
   "description": "Generate CRUD controllers for your express application!",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R spec --recursive \"./spec/**/*.spec.js\" --timeout 120000",
+    "test": "./node_modules/.bin/mocha -R spec --recursive \"./spec/**/*.spec.js\" --timeout 60000",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
