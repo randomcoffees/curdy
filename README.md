@@ -2,9 +2,11 @@
 
 Generate CRUD controllers for your express application!
 
-[![Build Status](https://api.travis-ci.org/hubba/curdy.svg?branch=master)](https://travis-ci.org/hubba/curdy)
-[![npm version](https://badge.fury.io/js/curdy.svg)](https://badge.fury.io/js/curdy)
-[![Dependency Status](https://gemnasium.com/badges/github.com/hubba/curdy.svg)](https://gemnasium.com/github.com/hubba/curdy)
+[![NPM Version](https://img.shields.io/npm/v/curdy.svg)](https://www.npmjs.com/package/curdy)
+[![Travis Build Status](https://img.shields.io/travis/hubba/curdy.svg)](https://travis-ci.org/hubba/curdy)
+<!-- [![Coveralls](https://img.shields.io/coveralls/github/hubba/curdy.svg)](https://coveralls.io/github/hubba/curdy) -->
+[![Gemnasium Dependency Status](https://img.shields.io/gemnasium/hubba/curdy.svg)](https://gemnasium.com/github.com/hubba/curdy)
+[![NPM Downloads](https://img.shields.io/npm/dm/curdy.svg)](https://www.npmjs.com/package/curdy)
 
 
 ## Install
@@ -14,7 +16,7 @@ npm install curdy --save
 
 ## Usage
 
-jyson can create many different types of templates, for a full list of examples check out the [example tests](https://github.com/hubba/jyson/blob/master/spec/lib/jyson/jyson.example.spec.js).
+Checkout the [example curdy app](https://github.com/hubba/curdy/tree/earobinson/resolve-failing-tests/spec/express/testApp).
 
 ### Model `simple.model.js`
 ```js
