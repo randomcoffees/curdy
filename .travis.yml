@@ -5,5 +5,13 @@ node_js:
   - "8"
   - "7"
   - "6"
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+before_install:
+  - npm i mongodb-download@2.2.3
 script:
-  - npm test
+  - npm run test:lint
+  - npm run test
