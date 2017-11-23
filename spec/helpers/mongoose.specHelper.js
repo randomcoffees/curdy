@@ -12,8 +12,8 @@ before(() => {
   });
 });
 
-beforeEach(() => {
-  Object.keys(mongoose.connection.models).forEach(modelKey => {
-    delete mongoose.connection.models[modelKey];
-  });
-});
+// beforeEach(() => {
+//   Object.keys(mongoose.connection.models).forEach(modelKey => {
+//     delete mongoose.connection.models[modelKey];
+//   });
+// });

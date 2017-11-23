@@ -4,9 +4,9 @@ Generate CRUD controllers for your express application!
 
 [![NPM Version](https://img.shields.io/npm/v/curdy.svg)](https://www.npmjs.com/package/curdy)
 [![Travis Build Status](https://img.shields.io/travis/hubba/curdy.svg)](https://travis-ci.org/hubba/curdy)
-<!-- [![Coveralls](https://img.shields.io/coveralls/github/hubba/curdy.svg)](https://coveralls.io/github/hubba/curdy) -->
+[![Coveralls](https://img.shields.io/coveralls/github/hubba/curdy.svg)](https://coveralls.io/github/hubba/curdy)
 [![Gemnasium Dependency Status](https://img.shields.io/gemnasium/hubba/curdy.svg)](https://gemnasium.com/github.com/hubba/curdy)
-[![NPM Downloads](https://img.shields.io/npm/dm/curdy.svg)](https://www.npmjs.com/package/curdy)
+[![NPM Downloads](https://img.shields.io/npm/dm/curdy.svg)](https://npm-stat.com/charts.html?package=curdy)
 
 
 ## Install

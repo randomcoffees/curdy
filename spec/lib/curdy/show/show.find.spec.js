@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
+const SimpleModel = require('./../../../models/simpleModel.model');
 const show = require('./../../../../lib/show');
 
 describe('curdy.show.find', () => {
@@ -12,17 +13,8 @@ describe('curdy.show.find', () => {
     beforeEach(() =>{
       return Q.when()
       .then(() => {
-        this.SimpleModel = mongoose.model('SimpleModel', new mongoose.Schema({
-          string: String,
-          number: Number,
-          date: Date,
-          boolean: Boolean
-        }, {
-          timestamps: false,
-        }));
-
         this.show = show.find.method(
-          this.SimpleModel,
+          SimpleModel,
           'simpleModel',
           {
             _id: 'params._id'
@@ -30,7 +22,7 @@ describe('curdy.show.find', () => {
         );
       })
       .then(() => {
-        return this.SimpleModel.create({
+        return SimpleModel.create({
           string: 'string',
           number: 42,
           date: Date.now(),
@@ -82,10 +74,10 @@ describe('curdy.show.find', () => {
         return this.show(req, null, Q.when)
         .then((err) => {
           expect(err).to.deep.equal({
-            message: `${this.SimpleModel.modelName} not found`,
+            message: `${SimpleModel.modelName} not found`,
             name: 'NotFound',
             code: 404,
-            modelName: this.SimpleModel.modelName
+            modelName: SimpleModel.modelName
           });
         });
       });

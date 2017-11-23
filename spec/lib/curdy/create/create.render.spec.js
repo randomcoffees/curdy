@@ -1,28 +1,35 @@
 require('./../../../helpers');
 
 const Q = require('q');
-const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
+const SimpleModel = require('./../../../models/simpleModel.model');
 const create = require('./../../../../lib/create');
 
 describe('curdy.create.render', () => {
+  beforeEach(() =>{
+    return SimpleModel.create({
+      string: 'string',
+      number: 42,
+      date: Date.now(),
+      boolean: true
+    })
+    .then(simpleModel => {
+      this.simpleModel = simpleModel;
+      this.res = {
+        status: () => {return this.res;},
+        json: Q.when
+      };
+    });
+  });
+
   describe('simple models', () => {
     beforeEach(() =>{
       return Q.when()
       .then(() => {
-        this.SimpleModel = mongoose.model('SimpleModel', new mongoose.Schema({
-          string: String,
-          number: Number,
-          date: Date,
-          boolean: Boolean
-        }, {
-          timestamps: false,
-        }));
-
-        this.create = create.render.method(
-          this.SimpleModel,
+        return this.create = create.render.method(
+          SimpleModel,
           'simpleModel',
           {
             string: 'string',
@@ -30,21 +37,6 @@ describe('curdy.create.render', () => {
             boolean: 'boolean'
           }
         );
-      })
-      .then(() => {
-        return this.SimpleModel.create({
-          string: 'string',
-          number: 42,
-          date: Date.now(),
-          boolean: true
-        });
-      })
-      .then(simpleModel => {
-        this.simpleModel = simpleModel;
-        this.res = {
-          status: () => {return this.res;},
-          json: Q.when
-        };
       });
     });
 
@@ -58,6 +50,28 @@ describe('curdy.create.render', () => {
         expect(json.string).to.equal(this.simpleModel.string);
         expect(json.number).to.equal(this.simpleModel.number);
         expect(json.boolean).to.equal(this.simpleModel.boolean);
+      });
+    });
+
+    it('must render allow functions to access the req', () => {
+      const req = {
+        simpleModel: this.simpleModel,
+        reqValue: 99
+      };
+
+      this.create = create.render.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          _id: ({object}) => {return object._id;},
+          reqValue: ({opts}) => {return opts.req.reqValue;}
+        }
+      );
+
+      return this.create(req, this.res)
+      .then(json => {
+        expect(json._id).to.equal(this.simpleModel._id);
+        expect(json.reqValue).to.equal(req.reqValue);
       });
     });
   });
