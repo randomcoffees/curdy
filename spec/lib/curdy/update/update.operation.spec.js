@@ -1,10 +1,11 @@
 require('./../../../helpers');
 
 const Q = require('q');
-const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
+const SimpleModel = require('./../../../models/simpleModel.model');
+const NestedModel = require('./../../../models/nestedModel.model');
 const update = require('./../../../../lib/update');
 
 describe('curdy.update.operation', () => {
@@ -12,17 +13,8 @@ describe('curdy.update.operation', () => {
     beforeEach(() =>{
       return Q.when()
       .then(() => {
-        this.SimpleModel = mongoose.model('SimpleModel', new mongoose.Schema({
-          string: String,
-          number: Number,
-          date: Date,
-          boolean: Boolean
-        }, {
-          timestamps: false,
-        }));
-
         this.update = update.operation.method(
-          this.SimpleModel,
+          SimpleModel,
           'simpleModel',
           {
             string: 'body.string',
@@ -32,7 +24,7 @@ describe('curdy.update.operation', () => {
         );
       })
       .then(() => {
-        return this.SimpleModel.create({
+        return SimpleModel.create({
           string: 'string',
           number: 42,
           date: Date.now(),
@@ -54,7 +46,7 @@ describe('curdy.update.operation', () => {
 
       return this.update(req, null, Q.when)
       .then(() => {
-        return this.SimpleModel.findById(this.simpleModel._id);
+        return SimpleModel.findById(this.simpleModel._id);
       })
       .then(simpleModel => {
         expect(simpleModel.string).to.equal('not string');
@@ -73,7 +65,7 @@ describe('curdy.update.operation', () => {
 
       return this.update(req, null, Q.when)
       .then(() => {
-        return this.SimpleModel.findById(this.simpleModel._id);
+        return SimpleModel.findById(this.simpleModel._id);
       })
       .then(simpleModel => {
         expect(simpleModel.string).to.equal('string');
@@ -92,7 +84,7 @@ describe('curdy.update.operation', () => {
 
       return this.update(req, null, Q.when)
       .then(() => {
-        return this.SimpleModel.findById(this.simpleModel._id);
+        return SimpleModel.findById(this.simpleModel._id);
       })
       .then(simpleModel => {
         expect(simpleModel.string).to.equal('string');
@@ -106,19 +98,8 @@ describe('curdy.update.operation', () => {
     beforeEach(() =>{
       return Q.when()
       .then(() => {
-        this.NestedModel = mongoose.model('NestedModel', new mongoose.Schema({
-          parent: {
-            string: String,
-            number: Number,
-            date: Date,
-            boolean: Boolean
-          }
-        }, {
-          timestamps: false,
-        }));
-
         this.update = update.operation.method(
-          this.NestedModel,
+          NestedModel,
           'nestedModel',
           {
             parent: {
@@ -130,7 +111,7 @@ describe('curdy.update.operation', () => {
         );
       })
       .then(() => {
-        return this.NestedModel.create({
+        return NestedModel.create({
           parent: {
             string: 'string',
             number: 42,
@@ -156,7 +137,7 @@ describe('curdy.update.operation', () => {
 
       return this.update(req, null, Q.when)
       .then(() => {
-        return this.NestedModel.findById(this.nestedModel._id);
+        return NestedModel.findById(this.nestedModel._id);
       })
       .then(nestedModel => {
         expect(nestedModel.parent.string).to.equal('not string');
@@ -175,7 +156,7 @@ describe('curdy.update.operation', () => {
 
       return this.update(req, null, Q.when)
       .then(() => {
-        return this.NestedModel.findById(this.nestedModel._id);
+        return NestedModel.findById(this.nestedModel._id);
       })
       .then(nestedModel => {
         expect(nestedModel.parent.string).to.equal('string');
@@ -194,7 +175,7 @@ describe('curdy.update.operation', () => {
 
       return this.update(req, null, Q.when)
       .then(() => {
-        return this.NestedModel.findById(this.nestedModel._id);
+        return NestedModel.findById(this.nestedModel._id);
       })
       .then(nestedModel => {
         expect(nestedModel.parent.string).to.equal('string');

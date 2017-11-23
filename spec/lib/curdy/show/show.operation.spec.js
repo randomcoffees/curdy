@@ -1,8 +1,8 @@
 require('./../../../helpers');
 
 const Q = require('q');
-const mongoose = require('mongoose');
 
+const SimpleModel = require('./../../../models/simpleModel.model');
 const show = require('./../../../../lib/show');
 
 describe('curdy.show.operation', () => {
@@ -10,17 +10,8 @@ describe('curdy.show.operation', () => {
     beforeEach(() =>{
       return Q.when()
       .then(() => {
-        this.SimpleModel = mongoose.model('SimpleModel', new mongoose.Schema({
-          string: String,
-          number: Number,
-          date: Date,
-          boolean: Boolean
-        }, {
-          timestamps: false,
-        }));
-
         this.show = show.operation.method(
-          this.SimpleModel,
+          SimpleModel,
           'simpleModel',
           {
             string: 'body.string',
@@ -30,7 +21,7 @@ describe('curdy.show.operation', () => {
         );
       })
       .then(() => {
-        return this.SimpleModel.create({
+        return SimpleModel.create({
           string: 'string',
           number: 42,
           date: Date.now(),

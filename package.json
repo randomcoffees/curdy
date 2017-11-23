@@ -1,6 +1,6 @@
 {
   "name": "curdy",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Generate CRUD controllers for your express application!",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,9 @@
     "test:watch": "npm test -- --watch",
     "test:debug": "./node_modules/.bin/mocha --inspect --debug-brk -R spec --recursive \"./spec/**/*.spec.js\" --exit",
     "test:debug:watch": "npm run test:debug -- --watch",
-    "test:lint": "./node_modules/.bin/eslint ."
+    "test:lint": "./node_modules/.bin/eslint .",
+    "test:coverage": "./node_modules/.bin/nyc --reporter=html --reporter=text npm test",
+    "report:coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -29,17 +31,22 @@
   "devDependencies": {
     "body-parser": "^1.17.2",
     "chai": "^4.1.0",
+    "coveralls": "^3.0.0",
     "eslint": "^4.2.0",
-    "mocha": "^3.4.2",
+    "mocha": "^4.0.1",
     "mockgoose": "^7.3.3",
     "mongoose": "^4.11.3",
+    "nyc": "^11.3.0",
     "supertest": "^3.0.0",
     "supertest-as-promised": "^4.0.2"
   },
   "dependencies": {
     "express": "^4.15.4",
-    "jyson": "^1.1.0",
+    "jyson": "^2.0.0",
     "lodash": "^4.17.4",
     "q": "^1.5.0"
+  },
+  "nyc": {
+    "exclude": "**/*.spec.js"
   }
 }

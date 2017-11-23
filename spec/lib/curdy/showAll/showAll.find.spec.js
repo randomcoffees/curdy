@@ -1,10 +1,10 @@
 require('./../../../helpers');
 
 const Q = require('q');
-const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
+const SimpleModel = require('./../../../models/simpleModel.model');
 const showAll = require('./../../../../lib/showAll');
 
 describe('curdy.showAll.find', () => {
@@ -12,33 +12,24 @@ describe('curdy.showAll.find', () => {
     beforeEach(() =>{
       return Q.when()
       .then(() => {
-        this.SimpleModel = mongoose.model('SimpleModel', new mongoose.Schema({
-          string: String,
-          number: Number,
-          date: Date,
-          boolean: Boolean
-        }, {
-          timestamps: false,
-        }));
-
         this.showAll = showAll.find.method(
-          this.SimpleModel,
+          SimpleModel,
           'simpleModels',
           {}
         );
       })
       .then(() => {
-        return this.SimpleModel.remove({});
+        return SimpleModel.remove({});
       })
       .then(() => {
         return Q.all([
-          this.SimpleModel.create({
+          SimpleModel.create({
             string: 'string',
             number: 42,
             date: Date.now(),
             boolean: true
           }),
-          this.SimpleModel.create({
+          SimpleModel.create({
             string: 'string',
             number: 42,
             date: Date.now(),
@@ -75,17 +66,8 @@ describe('curdy.showAll.find', () => {
     beforeEach(() =>{
       return Q.when()
       .then(() => {
-        this.SimpleModel = mongoose.model('SimpleModel', new mongoose.Schema({
-          string: String,
-          number: Number,
-          date: Date,
-          boolean: Boolean
-        }, {
-          timestamps: false,
-        }));
-
         this.showAll = showAll.find.method(
-          this.SimpleModel,
+          SimpleModel,
           'simpleModels',
           {
             number: {
@@ -95,29 +77,29 @@ describe('curdy.showAll.find', () => {
         );
       })
       .then(() => {
-        return this.SimpleModel.remove({});
+        return SimpleModel.remove({});
       })
       .then(() => {
         return Q.all([
-          this.SimpleModel.create({
+          SimpleModel.create({
             string: 'string',
             number: 42,
             date: Date.now(),
             boolean: true
           }),
-          this.SimpleModel.create({
+          SimpleModel.create({
             string: 'string',
             number: 42,
             date: Date.now(),
             boolean: true
           }),
-          this.SimpleModel.create({
+          SimpleModel.create({
             string: 'string',
             number: 41,
             date: Date.now(),
             boolean: true
           }),
-          this.SimpleModel.create({
+          SimpleModel.create({
             string: 'string',
             number: 41,
             date: Date.now(),

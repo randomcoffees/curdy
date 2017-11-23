@@ -1,10 +1,10 @@
 require('./../../../helpers');
 
 const Q = require('q');
-const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
+const SimpleModel = require('./../../../models/simpleModel.model');
 const create = require('./../../../../lib/create');
 
 describe('curdy.create.operation', () => {
@@ -12,17 +12,8 @@ describe('curdy.create.operation', () => {
     beforeEach(() =>{
       return Q.when()
       .then(() => {
-        this.SimpleModel = mongoose.model('SimpleModel', new mongoose.Schema({
-          string: String,
-          number: Number,
-          date: Date,
-          boolean: Boolean
-        }, {
-          timestamps: false,
-        }));
-
         this.create = create.operation.method(
-          this.SimpleModel,
+          SimpleModel,
           'simpleModel',
           {
             string: 'body.string',
@@ -43,7 +34,7 @@ describe('curdy.create.operation', () => {
       return this.create(req, null, Q.when)
       .then(() => {
         expect(req.simpleModel._id).to.exist;
-        return this.SimpleModel.findById(req.simpleModel._id);
+        return SimpleModel.findById(req.simpleModel._id);
       })
       .then(simpleModel => {
         expect(simpleModel.string).to.equal('string');
@@ -60,7 +51,7 @@ describe('curdy.create.operation', () => {
       return this.create(req, null, Q.when)
       .then(() => {
         expect(req.simpleModel._id).to.exist;
-        return this.SimpleModel.findById(req.simpleModel._id);
+        return SimpleModel.findById(req.simpleModel._id);
       })
       .then(simpleModel => {
         expect(simpleModel.number).to.equal(42);
@@ -77,7 +68,7 @@ describe('curdy.create.operation', () => {
       return this.create(req, null, Q.when)
       .then(() => {
         expect(req.simpleModel._id).to.exist;
-        return this.SimpleModel.findById(req.simpleModel._id);
+        return SimpleModel.findById(req.simpleModel._id);
       })
       .then(simpleModel => {
         expect(simpleModel.boolean).to.equal(true);

@@ -11,9 +11,3 @@ before(() => {
     return mongoose.connect('mongodb://example.com/TestingDB');
   });
 });
-
-beforeEach(() => {
-  Object.keys(mongoose.connection.models).forEach(modelKey => {
-    delete mongoose.connection.models[modelKey];
-  });
-});
