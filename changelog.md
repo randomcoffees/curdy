@@ -1,5 +1,8 @@
 # Curdy changelog
 
+## v3.0.0
+- Updated to [jyson 3.0.0](https://github.com/hubba/jyson/blob/master/changelog.md#v300)
+
 ## v2.0.1
 - Render templates can now access the res object via opts
 - Updates to jyson 2.0.0
