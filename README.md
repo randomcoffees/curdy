@@ -83,6 +83,11 @@ module.exports = router;
  - Easy to override and extend
  - Make working with CRUD simpler and faster.
 
+ ## Contributing
+
+Please read through our [contributing guidelines](CONTRIBUTING.md). Included are directions
+for opening issues, coding standards, and notes on development.
+
 ***
 
 Built with ❤️ at [Hubba](https://www.hubba.com?utm_campaign=hubba_oss).
