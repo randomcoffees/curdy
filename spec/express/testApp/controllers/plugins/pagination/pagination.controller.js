@@ -1,7 +1,7 @@
 const curdy = require('./../../../../../../index');
 const PaginationModel = require('./paginationModel.model');
-const OrderByPlugin = require('./../../../../../../plugins/orderBy');
-const PaginationPlugin = require('./../../../../../../plugins/pagination');
+const OrderByPlugin = curdy.plugins.orderBy;
+const PaginationPlugin = curdy.plugins.pagination;
 
 module.exports = curdy.generateController(
   PaginationModel,
