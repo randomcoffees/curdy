@@ -1,6 +1,5 @@
 const curdy = require('./../../../../../../index');
 const OrderModel = require('./orderedModel.model');
-// const OrderByPlugin = curdy.plugins.orderBy
 
 module.exports = curdy.generateController(
   OrderModel,
