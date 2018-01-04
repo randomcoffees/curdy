@@ -1,5 +1,8 @@
 # Curdy changelog
 
+## v3.1.0
+- Plugins are now exposed via curdy
+
 ## v3.0.0
 - Updated to [jyson 3.0.0](https://github.com/hubba/jyson/blob/master/changelog.md#v300)
 
