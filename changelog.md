@@ -1,5 +1,8 @@
 # Curdy changelog
 
+## v3.2.0
+- Adds a SimpleSort plugin for simpler sorting
+
 ## v3.1.0
 - Plugins are now exposed via curdy
 

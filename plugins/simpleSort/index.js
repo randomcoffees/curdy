@@ -1,1 +1,1 @@
-module.exports = require('./lib/orderBy');
+module.exports = require('./lib/simpleSort');
