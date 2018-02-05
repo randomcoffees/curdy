@@ -20,10 +20,6 @@ Object.assign(
       paramString: ({ opts }) => opts.req.params.string,
     }
   }, {
-    create: {},
-    delete: {},
-    show: {},
-    update: {},
     showAll: {
       find: {
         string: 'params.string'
