@@ -35,6 +35,7 @@
     "eslint": "^4.2.0",
     "mocha": "^4.0.1",
     "mockgoose": "^7.3.3",
+    "mongodb-download": "^2.2.3",
     "mongoose": "^4.11.3",
     "nyc": "^11.3.0",
     "supertest": "^3.0.0",
