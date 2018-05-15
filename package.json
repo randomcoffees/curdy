@@ -1,6 +1,6 @@
 {
   "name": "curdy",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Generate CRUD controllers for your express application!",
   "main": "index.js",
   "scripts": {
