@@ -1,6 +1,6 @@
 {
   "name": "curdy",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Generate CRUD controllers for your express application!",
   "main": "index.js",
   "scripts": {
@@ -29,16 +29,16 @@
   },
   "homepage": "https://github.com/hubba/curdy#readme",
   "devDependencies": {
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.3",
     "chai": "^4.1.0",
     "coveralls": "^3.0.1",
     "eslint": "^4.19.1",
     "mocha": "^5.1.1",
     "mockgoose": "^7.3.5",
     "mongodb-download": "^2.2.6",
-    "mongoose": "^5.0.17",
-    "nyc": "^11.7.1",
-    "supertest": "^3.0.0",
+    "mongoose": "^5.1.1",
+    "nyc": "^11.8.0",
+    "supertest": "^3.1.0",
     "supertest-as-promised": "^4.0.2"
   },
   "dependencies": {
