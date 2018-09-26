@@ -1,43 +1,40 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const showAll = require('./../../../../lib/showAll');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.showAll.render', () => {
-  beforeEach(() =>{
+  beforeEach(() => {
     return SimpleModel.create({
       string: 'string',
       number: 42,
       date: Date.now(),
       boolean: true
     })
-    .then(simpleModel => {
+    .then((simpleModel) => {
       this.simpleModel = simpleModel;
       this.res = {
         status: () => {return this.res;},
-        json: Q.when
+        json: utilities.when
       };
     });
   });
 
   describe('simple models', () => {
-    beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.showAll = showAll.render.method(
-          SimpleModel,
-          'simpleModels',
-          {
-            string: 'string',
-            number: 'number',
-            boolean: 'boolean'
-          }
-        );
-      });
+    beforeEach(() => {
+      this.showAll = showAll.render.method(
+        SimpleModel,
+        'simpleModels',
+        {
+          string: 'string',
+          number: 'number',
+          boolean: 'boolean'
+        }
+      );
     });
 
     it('must render', () => {
@@ -46,7 +43,7 @@ describe('curdy.showAll.render', () => {
       };
 
       return this.showAll(req, this.res)
-      .then(json => {
+      .then((json) => {
         expect(json[0].string).to.equal(this.simpleModel.string);
         expect(json[0].number).to.equal(this.simpleModel.number);
         expect(json[0].boolean).to.equal(this.simpleModel.boolean);
@@ -66,13 +63,13 @@ describe('curdy.showAll.render', () => {
         SimpleModel,
         'simpleModels',
         {
-          _id: ({object}) => {return object._id;},
-          reqValue: ({opts}) => {return opts.req.reqValue;}
+          _id: ({ object }) => {return object._id;},
+          reqValue: ({ opts }) => {return opts.req.reqValue;}
         }
       );
 
       return this.showAll(req, this.res)
-      .then(json => {
+      .then((json) => {
         expect(json[0]._id).to.equal(this.simpleModel._id);
         expect(json[0].reqValue).to.equal(req.reqValue);
         expect(json[1]._id).to.equal(this.simpleModel._id);

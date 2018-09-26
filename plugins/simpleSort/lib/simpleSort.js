@@ -1,23 +1,23 @@
 module.exports = (curdy, options) => {
-  const expandedOptions = options.map(option => {
+  const expandedOptions = options.map((option) => {
     if (typeof option === 'string' || option instanceof String) {
-      return {sortKey: option, attributePath: option};
+      return { sortKey: option, attributePath: option };
     }
 
     return option;
   });
 
-  const defaultSort = { [expandedOptions[0].attributePath]: -1};
+  const defaultSort = { [expandedOptions[0].attributePath]: -1 };
 
   curdy.showAll.find.getSortTemplate = () => {
     return {
-      sort: ({object}) => {
+      sort: ({ object }) => {
         if (!object.query || !object.query.sort) {
           return defaultSort;
         }
 
         const sort = object.query.sort.split(':');
-        const expandedOption = expandedOptions.find(expandedOptionCandidate => {
+        const expandedOption = expandedOptions.find((expandedOptionCandidate) => {
           return expandedOptionCandidate.sortKey.toLowerCase() === sort[0].toLowerCase();
         });
 

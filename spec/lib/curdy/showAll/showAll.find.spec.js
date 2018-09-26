@@ -1,28 +1,24 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const showAll = require('./../../../../lib/showAll');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.showAll.find', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
-      return Q.when()
+    beforeEach(() => {
+      this.showAll = showAll.find.method(
+        SimpleModel,
+        'simpleModels',
+        {}
+      );
+
+      return SimpleModel.remove({})
       .then(() => {
-        this.showAll = showAll.find.method(
-          SimpleModel,
-          'simpleModels',
-          {}
-        );
-      })
-      .then(() => {
-        return SimpleModel.remove({});
-      })
-      .then(() => {
-        return Q.all([
+        return Promise.all([
           SimpleModel.create({
             string: 'string',
             number: 42,
@@ -37,10 +33,10 @@ describe('curdy.showAll.find', () => {
           })
         ]);
       })
-      .then(simpleModels => {
+      .then((simpleModels) => {
         this.simpleModels = simpleModels;
         this.res = {
-          json: Q.when
+          json: utilities.when
         };
       });
     });
@@ -63,24 +59,20 @@ describe('curdy.showAll.find', () => {
   });
 
   describe('a complex find', () => {
-    beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.showAll = showAll.find.method(
-          SimpleModel,
-          'simpleModels',
-          {
-            number: {
-              $gt: 'params.number'
-            }
+    beforeEach(() => {
+      this.showAll = showAll.find.method(
+        SimpleModel,
+        'simpleModels',
+        {
+          number: {
+            $gt: 'params.number'
           }
-        );
-      })
+        }
+      );
+
+      return SimpleModel.remove({})
       .then(() => {
-        return SimpleModel.remove({});
-      })
-      .then(() => {
-        return Q.all([
+        return Promise.all([
           SimpleModel.create({
             string: 'string',
             number: 42,
@@ -107,10 +99,10 @@ describe('curdy.showAll.find', () => {
           })
         ]);
       })
-      .then(simpleModels => {
+      .then((simpleModels) => {
         this.simpleModels = simpleModels;
         this.res = {
-          json: Q.when
+          json: utilities.when
         };
       });
     });

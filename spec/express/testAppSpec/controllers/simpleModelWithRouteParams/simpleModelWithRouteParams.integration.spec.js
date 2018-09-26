@@ -1,6 +1,5 @@
-const Q = require('q');
 const chai = require('chai');
-const request = require('supertest-as-promised');
+const request = require('supertest');
 
 const expect = chai.expect;
 
@@ -17,7 +16,7 @@ describe('simpleModel.controller.integration.spec', () => {
       number: 42,
       date: Date.now(),
       boolean: true,
-    }).then(simpleModel => {
+    }).then((simpleModel) => {
       this.simpleModel = simpleModel;
     });
   });
@@ -41,7 +40,7 @@ describe('simpleModel.controller.integration.spec', () => {
 
         return this.SimpleModel.findById(body._id);
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         expect(simpleModel.string).to.equal('123');
         expect(simpleModel.number).to.equal(43);
         expect(simpleModel.boolean).to.equal(false);
@@ -57,7 +56,7 @@ describe('simpleModel.controller.integration.spec', () => {
       .then(({ body }) => {
         expect(body.success).to.equal(true);
 
-        return this.SimpleModel.count({ _id: this.simpleModel._id});
+        return this.SimpleModel.count({ _id: this.simpleModel._id });
       })
       .then((simpleModelCount) => {
         expect(simpleModelCount).to.equal(0);
@@ -83,7 +82,7 @@ describe('simpleModel.controller.integration.spec', () => {
     beforeEach(() => {
       return this.SimpleModel.remove({})
       .then(() => {
-        return Q.all([
+        return Promise.all([
           this.SimpleModel.create({
             string: '123',
             number: 42,

@@ -1,13 +1,12 @@
-const Q = require('q');
 const chai = require('chai');
-const request = require('supertest-as-promised');
+const request = require('supertest');
 
 const expect = chai.expect;
 
 const expressIntegrationHelper = require('./../../express.integrationHelper');
 
 describe('simpleModel.controller.integration.spec', () => {
-  beforeEach(() =>{
+  beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
     this.SimpleModel = require('./../../../testApp/controllers/simpleModel/simpleModel.model');
@@ -18,7 +17,7 @@ describe('simpleModel.controller.integration.spec', () => {
       date: Date.now(),
       boolean: true
     })
-    .then(simpleModel => {
+    .then((simpleModel) => {
       this.simpleModel = simpleModel;
     });
   });
@@ -56,7 +55,7 @@ describe('simpleModel.controller.integration.spec', () => {
       .then(({ body }) => {
         expect(body.success).to.equal(true);
 
-        return this.SimpleModel.count({ _id: this.simpleModel._id});
+        return this.SimpleModel.count({ _id: this.simpleModel._id });
       })
       .then((simpleModelCount) => {
         expect(simpleModelCount).to.equal(0);
@@ -81,7 +80,7 @@ describe('simpleModel.controller.integration.spec', () => {
     beforeEach(() => {
       return this.SimpleModel.remove({})
       .then(() => {
-        return Q.all([
+        return Promise.all([
           this.SimpleModel.create({
             string: 'string',
             number: 42,
@@ -106,7 +105,7 @@ describe('simpleModel.controller.integration.spec', () => {
       .expect(200)
       .then(({ body }) => {
         expect(body.length).to.equal(this.simpleModels.length);
-        this.simpleModels.forEach(simpleModel => {
+        this.simpleModels.forEach((simpleModel) => {
           expect(body).to.deep.contain({
             _id: simpleModel._id.toString(),
             string: simpleModel.string,

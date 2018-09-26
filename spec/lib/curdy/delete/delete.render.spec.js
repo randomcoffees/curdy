@@ -1,41 +1,38 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const _delete = require('./../../../../lib/delete');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.delete.render', () => {
-  beforeEach(() =>{
+  beforeEach(() => {
     return SimpleModel.create({
       string: 'string',
       number: 42,
       date: Date.now(),
       boolean: true
     })
-    .then(simpleModel => {
+    .then((simpleModel) => {
       this.simpleModel = simpleModel;
       this.res = {
         status: () => {return this.res;},
-        json: Q.when
+        json: utilities.when
       };
     });
   });
 
   describe('simple models', () => {
-    beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.delete = _delete.render.method(
-          SimpleModel,
-          'simpleModel',
-          {
-            status: () => { return 'success'; }
-          }
-        );
-      });
+    beforeEach(() => {
+      this.delete = _delete.render.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          status: () => { return 'success'; }
+        }
+      );
     });
 
     it('must render', () => {
@@ -44,7 +41,7 @@ describe('curdy.delete.render', () => {
       };
 
       return this.delete(req, this.res)
-      .then(json => {
+      .then((json) => {
         expect(json.status).to.equal('success');
       });
     });
@@ -59,14 +56,14 @@ describe('curdy.delete.render', () => {
         SimpleModel,
         'simpleModel',
         {
-          _id: ({object}) => {return object._id;},
-          reqValue: ({opts}) => {return opts.req.reqValue;},
+          _id: ({ object }) => {return object._id;},
+          reqValue: ({ opts }) => {return opts.req.reqValue;},
           status: () => { return 'success'; }
         }
       );
 
       return this.delete(req, this.res)
-      .then(json => {
+      .then((json) => {
         expect(json._id).to.equal(this.simpleModel._id);
         expect(json.reqValue).to.equal(req.reqValue);
       });

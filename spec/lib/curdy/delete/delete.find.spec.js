@@ -1,37 +1,33 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const _delete = require('./../../../../lib/delete');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.delete.find', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.delete = _delete.find.method(
-          SimpleModel,
-          'simpleModel',
-          {
-            _id: 'params._id'
-          }
-        );
+    beforeEach(() => {
+      this.delete = _delete.find.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          _id: 'params._id'
+        }
+      );
+
+      return SimpleModel.create({
+        string: 'string',
+        number: 42,
+        date: Date.now(),
+        boolean: true
       })
-      .then(() => {
-        return SimpleModel.create({
-          string: 'string',
-          number: 42,
-          date: Date.now(),
-          boolean: true
-        });
-      })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
         this.res = {
-          json: Q.when
+          json: utilities.when
         };
       });
     });

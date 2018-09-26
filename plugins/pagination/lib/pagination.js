@@ -1,7 +1,7 @@
 module.exports = (curdy) => {
   curdy.showAll.find.getSkipTemplate = () => {
     return {
-      skip: ({object}) => {
+      skip: ({ object }) => {
         if (object.query && object.query.skip) {
           return parseInt(object.query.skip);
         }
@@ -12,7 +12,7 @@ module.exports = (curdy) => {
 
   curdy.showAll.find.getLimitTemplate = () => {
     return {
-      limit: ({object}) => {
+      limit: ({ object }) => {
         if (object.query && object.query.limit) {
           return parseInt(object.query.limit);
         }

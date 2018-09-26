@@ -1,6 +1,5 @@
-const Q = require('q');
 const chai = require('chai');
-const request = require('supertest-as-promised');
+const request = require('supertest');
 
 const expect = chai.expect;
 
@@ -9,7 +8,7 @@ const expressIntegrationHelper = require('./../../../express.integrationHelper')
 const BASE_URI = '/plugins/simpleSort/regression';
 
 describe('simpleSortRegression.controller.integration.spec', () => {
-  beforeEach(() =>{
+  beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
     this.SimpleSortModel = require('./../../../../testApp/controllers/plugins/simpleSort/simpleSortModel.model');
@@ -17,7 +16,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
     return this.SimpleSortModel.create({
       name: 'name',
     })
-    .then(simpleSortModel => {
+    .then((simpleSortModel) => {
       this.simpleSortModel = simpleSortModel;
     });
   });
@@ -49,7 +48,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       .then(({ body }) => {
         expect(body.success).to.equal(true);
 
-        return this.SimpleSortModel.count({ _id: this.simpleSortModel._id});
+        return this.SimpleSortModel.count({ _id: this.simpleSortModel._id });
       })
       .then((simpleSortModelCount) => {
         expect(simpleSortModelCount).to.equal(0);
@@ -74,7 +73,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
     beforeEach(() => {
       return this.SimpleSortModel.remove({})
       .then(() => {
-        return Q.all([
+        return Promise.all([
           this.SimpleSortModel.create({
             name: 'name'
           }),
@@ -100,7 +99,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       .expect(200)
       .then(({ body }) => {
         expect(body.length).to.equal(this.simpleSortModels.length);
-        this.simpleSortModels.forEach(simpleSortModel => {
+        this.simpleSortModels.forEach((simpleSortModel) => {
           expect(body).to.deep.contain({
             _id: simpleSortModel._id.toString(),
             name: simpleSortModel.name,

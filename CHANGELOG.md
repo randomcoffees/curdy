@@ -1,5 +1,12 @@
 # Curdy changelog
 
+## v3.4.0
+- Removed dependency on Q
+- Removed dependency on lodash
+- Removed dependency on supertest-as-promised
+- Updated packages
+- Consolidated utilities
+
 ## v3.3.3
 - Updated packages
 

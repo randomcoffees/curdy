@@ -1,36 +1,32 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const _delete = require('./../../../../lib/delete');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.delete.operation', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.delete = _delete.operation.method(
-          SimpleModel,
-          'simpleModel',
-          {
-            string: 'body.string',
-            number: 'params.number',
-            boolean: 'otherRequestObjects.boolean'
-          }
-        );
+    beforeEach(() => {
+      this.delete = _delete.operation.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          string: 'body.string',
+          number: 'params.number',
+          boolean: 'otherRequestObjects.boolean'
+        }
+      );
+
+      return SimpleModel.create({
+        string: 'string',
+        number: 42,
+        date: Date.now(),
+        boolean: true
       })
-      .then(() => {
-        return SimpleModel.create({
-          string: 'string',
-          number: 42,
-          date: Date.now(),
-          boolean: true
-        });
-      })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
       });
     });
@@ -40,11 +36,11 @@ describe('curdy.delete.operation', () => {
         simpleModel: this.simpleModel
       };
 
-      return this.delete(req, null, Q.when)
+      return this.delete(req, null, utilities.when)
       .then(() => {
-        return SimpleModel.count({_id: this.simpleModel._id});
+        return SimpleModel.count({ _id: this.simpleModel._id });
       })
-      .then(simpleModelCount => {
+      .then((simpleModelCount) => {
         expect(simpleModelCount).to.equal(0);
       });
     });

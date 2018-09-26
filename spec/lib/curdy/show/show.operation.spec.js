@@ -1,34 +1,29 @@
 require('./../../../helpers');
 
-const Q = require('q');
-
 const SimpleModel = require('./../../../models/simpleModel.model');
 const show = require('./../../../../lib/show');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.show.operation', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.show = show.operation.method(
-          SimpleModel,
-          'simpleModel',
-          {
-            string: 'body.string',
-            number: 'params.number',
-            boolean: 'otherRequestObjects.boolean'
-          }
-        );
+    beforeEach(() => {
+      this.show = show.operation.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          string: 'body.string',
+          number: 'params.number',
+          boolean: 'otherRequestObjects.boolean'
+        }
+      );
+
+      return SimpleModel.create({
+        string: 'string',
+        number: 42,
+        date: Date.now(),
+        boolean: true
       })
-      .then(() => {
-        return SimpleModel.create({
-          string: 'string',
-          number: 42,
-          date: Date.now(),
-          boolean: true
-        });
-      })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
       });
     });
@@ -38,7 +33,7 @@ describe('curdy.show.operation', () => {
         simpleModel: this.simpleModel
       };
 
-      return this.show(req, null, Q.when);
+      return this.show(req, null, utilities.when);
     });
   });
 });
