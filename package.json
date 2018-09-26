@@ -1,6 +1,6 @@
 {
   "name": "curdy",
-  "version": "3.3.3",
+  "version": "4.0.0",
   "description": "Generate CRUD controllers for your express application!",
   "main": "index.js",
   "scripts": {
@@ -44,8 +44,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "jyson": "^3.0.1",
-    "lodash": "^4.17.10",
-    "q": "^1.5.0"
+    "lodash": "^4.17.10"
   },
   "nyc": {
     "exclude": "**/*.spec.js"

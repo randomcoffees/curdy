@@ -1,4 +1,3 @@
-const Q = require('q');
 const chai = require('chai');
 const request = require('supertest-as-promised');
 
@@ -17,7 +16,7 @@ describe('orderByDescending.controller.integration.spec', () => {
 
     return this.OrderedModel.remove({})
     .then(() => {
-      return Q.all([
+      return Promise.all([
         this.OrderedModel.create({
           name: 'name',
           createdAt: date.setSeconds(date.getSeconds() - 1)

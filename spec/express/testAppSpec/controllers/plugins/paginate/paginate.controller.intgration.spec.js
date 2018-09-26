@@ -1,4 +1,3 @@
-const Q = require('q');
 const chai = require('chai');
 const request = require('supertest-as-promised');
 
@@ -17,7 +16,7 @@ describe('orderByAscending.controller.integration.spec', () => {
 
     return this.PaginationModel.remove({})
     .then(() => {
-      return Q.all([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29].map(index => {
+      return Promise.all([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29].map(index => {
         return this.PaginationModel.create({
           name: `name ${index}`,
           createdAt: date.setSeconds(date.getSeconds() - index)

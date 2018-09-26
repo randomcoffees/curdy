@@ -1,27 +1,24 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const create = require('./../../../../lib/create');
+const utilities = require('../../../../lib/utilities');
 
 describe('curdy.create.operation', () => {
   describe('simple models', () => {
     beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.create = create.operation.method(
-          SimpleModel,
-          'simpleModel',
-          {
-            string: 'body.string',
-            number: 'params.number',
-            boolean: 'otherRequestObjects.boolean'
-          }
-        );
-      });
+      this.create = create.operation.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          string: 'body.string',
+          number: 'params.number',
+          boolean: 'otherRequestObjects.boolean'
+        }
+      );
     });
 
     it('must create a simple model via body', () => {
@@ -30,8 +27,7 @@ describe('curdy.create.operation', () => {
           string: 'string'
         }
       };
-
-      return this.create(req, null, Q.when)
+      return this.create(req, null, utilities.when)
       .then(() => {
         expect(req.simpleModel._id).to.exist;
         return SimpleModel.findById(req.simpleModel._id);
@@ -48,7 +44,7 @@ describe('curdy.create.operation', () => {
         }
       };
 
-      return this.create(req, null, Q.when)
+      return this.create(req, null, utilities.when)
       .then(() => {
         expect(req.simpleModel._id).to.exist;
         return SimpleModel.findById(req.simpleModel._id);
@@ -65,7 +61,7 @@ describe('curdy.create.operation', () => {
         }
       };
 
-      return this.create(req, null, Q.when)
+      return this.create(req, null, utilities.when)
       .then(() => {
         expect(req.simpleModel._id).to.exist;
         return SimpleModel.findById(req.simpleModel._id);

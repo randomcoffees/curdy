@@ -1,4 +1,3 @@
-const Q = require('q');
 const chai = require('chai');
 const request = require('supertest-as-promised');
 
@@ -74,7 +73,7 @@ describe('orderByRegression.controller.integration.spec', () => {
     beforeEach(() => {
       return this.OrderedModel.remove({})
       .then(() => {
-        return Q.all([
+        return Promise.all([
           this.OrderedModel.create({
             name: 'name'
           }),

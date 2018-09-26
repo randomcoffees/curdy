@@ -1,5 +1,9 @@
 # Curdy changelog
 
+## v4.0.0
+- Added a patch
+- Update is now consistent between documents and documents
+
 ## v3.3.3
 - Updated packages
 

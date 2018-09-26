@@ -1,11 +1,11 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const _delete = require('./../../../../lib/delete');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.delete.render', () => {
   beforeEach(() =>{
@@ -19,23 +19,20 @@ describe('curdy.delete.render', () => {
       this.simpleModel = simpleModel;
       this.res = {
         status: () => {return this.res;},
-        json: Q.when
+        json: utilities.when
       };
     });
   });
 
   describe('simple models', () => {
     beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.delete = _delete.render.method(
-          SimpleModel,
-          'simpleModel',
-          {
-            status: () => { return 'success'; }
-          }
-        );
-      });
+      this.delete = _delete.render.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          status: () => { return 'success'; }
+        }
+      );
     });
 
     it('must render', () => {

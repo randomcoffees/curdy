@@ -1,4 +1,3 @@
-const Q = require('q');
 const chai = require('chai');
 const request = require('supertest-as-promised');
 
@@ -74,7 +73,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
     beforeEach(() => {
       return this.SimpleSortModel.remove({})
       .then(() => {
-        return Q.all([
+        return Promise.all([
           this.SimpleSortModel.create({
             name: 'name'
           }),

@@ -1,4 +1,3 @@
-const Q = require('q');
 const chai = require('chai');
 const request = require('supertest-as-promised');
 
@@ -81,7 +80,7 @@ describe('simpleModel.controller.integration.spec', () => {
     beforeEach(() => {
       return this.SimpleModel.remove({})
       .then(() => {
-        return Q.all([
+        return Promise.all([
           this.SimpleModel.create({
             string: 'string',
             number: 42,

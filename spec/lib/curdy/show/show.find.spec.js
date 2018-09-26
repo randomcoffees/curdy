@@ -1,38 +1,34 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const mongoose = require('mongoose');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const show = require('./../../../../lib/show');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.show.find', () => {
   describe('simple models', () => {
     beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        this.show = show.find.method(
-          SimpleModel,
-          'simpleModel',
-          {
-            _id: 'params._id'
-          }
-        );
-      })
-      .then(() => {
-        return SimpleModel.create({
-          string: 'string',
-          number: 42,
-          date: Date.now(),
-          boolean: true
-        });
+      this.show = show.find.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          _id: 'params._id'
+        }
+      );
+
+      return SimpleModel.create({
+        string: 'string',
+        number: 42,
+        date: Date.now(),
+        boolean: true
       })
       .then(simpleModel => {
         this.simpleModel = simpleModel;
         this.res = {
-          json: Q.when
+          json: utilities.when
         };
       });
     });
@@ -58,7 +54,7 @@ describe('curdy.show.find', () => {
           }
         };
 
-        return this.show(req, null, Q.when)
+        return this.show(req, null, utilities.when)
         .then((err) => {
           expect(err.name).to.equal('CastError');
         });
@@ -71,7 +67,7 @@ describe('curdy.show.find', () => {
           }
         };
 
-        return this.show(req, null, Q.when)
+        return this.show(req, null, utilities.when)
         .then((err) => {
           expect(err).to.deep.equal({
             message: `${SimpleModel.modelName} not found`,

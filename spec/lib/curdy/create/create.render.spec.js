@@ -1,11 +1,11 @@
 require('./../../../helpers');
 
-const Q = require('q');
 const chai = require('chai');
 const expect = chai.expect;
 
 const SimpleModel = require('./../../../models/simpleModel.model');
 const create = require('./../../../../lib/create');
+const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.create.render', () => {
   beforeEach(() =>{
@@ -19,25 +19,22 @@ describe('curdy.create.render', () => {
       this.simpleModel = simpleModel;
       this.res = {
         status: () => {return this.res;},
-        json: Q.when
+        json: utilities.when
       };
     });
   });
 
   describe('simple models', () => {
     beforeEach(() =>{
-      return Q.when()
-      .then(() => {
-        return this.create = create.render.method(
-          SimpleModel,
-          'simpleModel',
-          {
-            string: 'string',
-            number: 'number',
-            boolean: 'boolean'
-          }
-        );
-      });
+      return this.create = create.render.method(
+        SimpleModel,
+        'simpleModel',
+        {
+          string: 'string',
+          number: 'number',
+          boolean: 'boolean'
+        }
+      );
     });
 
     it('must render', () => {

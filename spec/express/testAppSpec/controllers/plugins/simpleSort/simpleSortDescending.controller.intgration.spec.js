@@ -1,4 +1,3 @@
-const Q = require('q');
 const chai = require('chai');
 const request = require('supertest-as-promised');
 
@@ -17,7 +16,7 @@ describe('simpleSortDescending.controller.integration.spec', () => {
 
     return this.SimpleSortModel.remove({})
     .then(() => {
-      return Q.all([
+      return Promise.all([
         this.SimpleSortModel.create({
           name: 'name',
           createdAt: date.setSeconds(date.getSeconds() - 1)
