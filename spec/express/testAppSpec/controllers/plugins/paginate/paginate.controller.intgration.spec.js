@@ -98,5 +98,43 @@ describe('orderByAscending.controller.integration.spec', () => {
         }));
       });
     });
+
+    describe('sort', () => {
+      it('must allow the user to sort createdAt asc', () => {
+        return request(this.app)
+        .get(`${BASE_URI}/?sort=createdAt:asc`)
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.length).to.equal(20);
+          expect(body).to.deep.equal(this.paginationModels.slice(0, 20).map((orderedModel) => {
+            return {
+              _id: orderedModel._id.toString(),
+              name: orderedModel.name,
+              createdAt: orderedModel.createdAt.toISOString(),
+              updatedAt: orderedModel.updatedAt.toISOString(),
+            };
+          }));
+        });
+      });
+
+      it('must allow the user to sort createdAt desc', () => {
+        this.paginationModels.reverse();
+
+        return request(this.app)
+        .get(`${BASE_URI}/?sort=createdAt:desc`)
+        .expect(200)
+        .then(({ body }) => {
+          expect(body.length).to.equal(20);
+          expect(body).to.deep.equal(this.paginationModels.slice(0, 20).map((orderedModel) => {
+            return {
+              _id: orderedModel._id.toString(),
+              name: orderedModel.name,
+              createdAt: orderedModel.createdAt.toISOString(),
+              updatedAt: orderedModel.updatedAt.toISOString(),
+            };
+          }));
+        });
+      });
+    });
   });
 });
