@@ -8,14 +8,14 @@ const show = require('./../../../../lib/show');
 const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.show.render', () => {
-  beforeEach(() =>{
+  beforeEach(() => {
     return SimpleModel.create({
       string: 'string',
       number: 42,
       date: Date.now(),
       boolean: true
     })
-    .then(simpleModel => {
+    .then((simpleModel) => {
       this.simpleModel = simpleModel;
       this.res = {
         status: () => {return this.res;},
@@ -25,7 +25,7 @@ describe('curdy.show.render', () => {
   });
 
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.show = show.render.method(
         SimpleModel,
         'simpleModel',
@@ -43,7 +43,7 @@ describe('curdy.show.render', () => {
       };
 
       return this.show(req, this.res)
-      .then(json => {
+      .then((json) => {
         expect(json.string).to.equal(this.simpleModel.string);
         expect(json.number).to.equal(this.simpleModel.number);
         expect(json.boolean).to.equal(this.simpleModel.boolean);
@@ -60,13 +60,13 @@ describe('curdy.show.render', () => {
         SimpleModel,
         'simpleModel',
         {
-          _id: ({object}) => {return object._id;},
-          reqValue: ({opts}) => {return opts.req.reqValue;}
+          _id: ({ object }) => {return object._id;},
+          reqValue: ({ opts }) => {return opts.req.reqValue;}
         }
       );
 
       return this.show(req, this.res)
-      .then(json => {
+      .then((json) => {
         expect(json._id).to.equal(this.simpleModel._id);
         expect(json.reqValue).to.equal(req.reqValue);
       });

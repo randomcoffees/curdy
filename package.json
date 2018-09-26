@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/hubba/curdy#readme",
   "devDependencies": {
+    "@ear/eslint-config": "^2.0.0",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "coveralls": "^3.0.2",

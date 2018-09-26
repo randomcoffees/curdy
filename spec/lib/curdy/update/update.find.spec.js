@@ -9,7 +9,7 @@ const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.update.find', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.update = update.find.method(
         SimpleModel,
         'simpleModel',
@@ -24,7 +24,7 @@ describe('curdy.update.find', () => {
         date: Date.now(),
         boolean: true
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
       });
     });

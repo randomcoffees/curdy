@@ -11,7 +11,7 @@ const utilities = require('../../../../lib/utilities');
 
 describe('curdy.update.operation', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.update = update.operation.method(
         SimpleModel,
         'simpleModel',
@@ -28,7 +28,7 @@ describe('curdy.update.operation', () => {
         date: Date.now(),
         boolean: true
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
       });
     });
@@ -45,7 +45,7 @@ describe('curdy.update.operation', () => {
       .then(() => {
         return SimpleModel.findById(this.simpleModel._id);
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         expect(simpleModel.string).to.equal('not string');
         expect(simpleModel.number).to.equal(42);
         expect(simpleModel.boolean).to.equal(true);
@@ -64,7 +64,7 @@ describe('curdy.update.operation', () => {
       .then(() => {
         return SimpleModel.findById(this.simpleModel._id);
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         expect(simpleModel.string).to.equal('string');
         expect(simpleModel.number).to.equal(84);
         expect(simpleModel.boolean).to.equal(true);
@@ -83,7 +83,7 @@ describe('curdy.update.operation', () => {
       .then(() => {
         return SimpleModel.findById(this.simpleModel._id);
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         expect(simpleModel.string).to.equal('string');
         expect(simpleModel.number).to.equal(42);
         expect(simpleModel.boolean).to.equal(false);
@@ -92,7 +92,7 @@ describe('curdy.update.operation', () => {
   });
 
   describe('nested models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.update = update.operation.method(
         NestedModel,
         'nestedModel',
@@ -113,7 +113,7 @@ describe('curdy.update.operation', () => {
           boolean: true
         }
       })
-      .then(nestedModel => {
+      .then((nestedModel) => {
         this.nestedModel = nestedModel;
       });
     });
@@ -132,7 +132,7 @@ describe('curdy.update.operation', () => {
       .then(() => {
         return NestedModel.findById(this.nestedModel._id);
       })
-      .then(nestedModel => {
+      .then((nestedModel) => {
         expect(nestedModel.parent.string).to.equal('not string');
         expect(nestedModel.parent.number).to.equal(42);
         expect(nestedModel.parent.boolean).to.equal(true);
@@ -151,7 +151,7 @@ describe('curdy.update.operation', () => {
       .then(() => {
         return NestedModel.findById(this.nestedModel._id);
       })
-      .then(nestedModel => {
+      .then((nestedModel) => {
         expect(nestedModel.parent.string).to.equal('string');
         expect(nestedModel.parent.number).to.equal(84);
         expect(nestedModel.parent.boolean).to.equal(true);
@@ -170,7 +170,7 @@ describe('curdy.update.operation', () => {
       .then(() => {
         return NestedModel.findById(this.nestedModel._id);
       })
-      .then(nestedModel => {
+      .then((nestedModel) => {
         expect(nestedModel.parent.string).to.equal('string');
         expect(nestedModel.parent.number).to.equal(42);
         expect(nestedModel.parent.boolean).to.equal(false);

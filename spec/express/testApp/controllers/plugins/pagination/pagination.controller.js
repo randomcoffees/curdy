@@ -22,14 +22,14 @@ module.exports = curdy.generateController(
   }
 )
 .plugin(OrderByPlugin, {
-  sort: ({object}) => {
+  sort: ({ object }) => {
     if (object.query && object.query.sort) {
       const sort = object.query.sort.split(':');
       return {
         [sort[0]]: (sort[1].toLowerCase() === 'asc' ? 1 : -1)
       };
     }
-    return {createdAt: 1};
+    return { createdAt: 1 };
   }
 })
 .plugin(PaginationPlugin)

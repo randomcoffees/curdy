@@ -49,7 +49,7 @@ describe('orderByAscending.controller.integration.spec', () => {
       .expect(200)
       .then(({ body }) => {
         expect(body.length).to.equal(this.orderedModels.length);
-        expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+        expect(body).to.deep.equal(this.orderedModels.map((orderedModel) => {
           return {
             _id: orderedModel._id.toString(),
             name: orderedModel.name,
@@ -69,7 +69,7 @@ describe('orderByAscending.controller.integration.spec', () => {
         .expect(200)
         .then(({ body }) => {
           expect(body.length).to.equal(this.orderedModels.length);
-          expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+          expect(body).to.deep.equal(this.orderedModels.map((orderedModel) => {
             return {
               _id: orderedModel._id.toString(),
               name: orderedModel.name,
@@ -86,7 +86,7 @@ describe('orderByAscending.controller.integration.spec', () => {
         .expect(200)
         .then(({ body }) => {
           expect(body.length).to.equal(this.orderedModels.length);
-          expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+          expect(body).to.deep.equal(this.orderedModels.map((orderedModel) => {
             return {
               _id: orderedModel._id.toString(),
               name: orderedModel.name,
@@ -116,7 +116,7 @@ describe('orderByAscending.controller.integration.spec', () => {
           .expect(200)
           .then(({ body }) => {
             expect(body.length).to.equal(this.orderedModels.length);
-            expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+            expect(body).to.deep.equal(this.orderedModels.map((orderedModel) => {
               return {
                 _id: orderedModel._id.toString(),
                 name: orderedModel.name,
@@ -134,7 +134,7 @@ describe('orderByAscending.controller.integration.spec', () => {
           .expect(200)
           .then(({ body }) => {
             expect(body.length).to.equal(this.orderedModels.length);
-            expect(body).to.deep.equal(this.orderedModels.map(orderedModel => {
+            expect(body).to.deep.equal(this.orderedModels.map((orderedModel) => {
               return {
                 _id: orderedModel._id.toString(),
                 name: orderedModel.name,

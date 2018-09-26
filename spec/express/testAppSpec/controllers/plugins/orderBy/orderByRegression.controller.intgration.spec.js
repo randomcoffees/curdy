@@ -8,7 +8,7 @@ const expressIntegrationHelper = require('./../../../express.integrationHelper')
 const BASE_URI = '/plugins/orderBy/regression';
 
 describe('orderByRegression.controller.integration.spec', () => {
-  beforeEach(() =>{
+  beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
     this.OrderedModel = require('./../../../../testApp/controllers/plugins/orderBy/orderedModel.model');
@@ -16,7 +16,7 @@ describe('orderByRegression.controller.integration.spec', () => {
     return this.OrderedModel.create({
       name: 'name',
     })
-    .then(orderedModel => {
+    .then((orderedModel) => {
       this.orderedModel = orderedModel;
     });
   });
@@ -48,7 +48,7 @@ describe('orderByRegression.controller.integration.spec', () => {
       .then(({ body }) => {
         expect(body.success).to.equal(true);
 
-        return this.OrderedModel.count({ _id: this.orderedModel._id});
+        return this.OrderedModel.count({ _id: this.orderedModel._id });
       })
       .then((orderedModelCount) => {
         expect(orderedModelCount).to.equal(0);
@@ -99,7 +99,7 @@ describe('orderByRegression.controller.integration.spec', () => {
       .expect(200)
       .then(({ body }) => {
         expect(body.length).to.equal(this.orderedModels.length);
-        this.orderedModels.forEach(orderedModel => {
+        this.orderedModels.forEach((orderedModel) => {
           expect(body).to.deep.contain({
             _id: orderedModel._id.toString(),
             name: orderedModel.name,

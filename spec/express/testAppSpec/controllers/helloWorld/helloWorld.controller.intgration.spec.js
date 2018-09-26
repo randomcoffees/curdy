@@ -7,7 +7,7 @@ const expect = chai.expect;
 const expressIntegrationHelper = require('./../../express.integrationHelper');
 
 describe('helloWorld.controller.integration.spec', () => {
-  beforeEach(() =>{
+  beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
     this.a = 1;
   });

@@ -6,7 +6,7 @@ const utilities = require('../../../../lib/utilities');
 const SimpleModel = require('./../../../models/simpleModel.model');
 describe('curdy.showAll.operation', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.showAll = showAll.operation.method(
         SimpleModel,
         'simpleModel',
@@ -23,7 +23,7 @@ describe('curdy.showAll.operation', () => {
         date: Date.now(),
         boolean: true
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
       });
     });

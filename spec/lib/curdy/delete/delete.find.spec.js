@@ -9,7 +9,7 @@ const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.delete.find', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.delete = _delete.find.method(
         SimpleModel,
         'simpleModel',
@@ -24,7 +24,7 @@ describe('curdy.delete.find', () => {
         date: Date.now(),
         boolean: true
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
         this.res = {
           json: utilities.when

@@ -10,7 +10,7 @@ const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.show.find', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.show = show.find.method(
         SimpleModel,
         'simpleModel',
@@ -25,7 +25,7 @@ describe('curdy.show.find', () => {
         date: Date.now(),
         boolean: true
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
         this.res = {
           json: utilities.when

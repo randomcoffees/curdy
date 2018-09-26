@@ -20,5 +20,5 @@ module.exports = curdy.generateController(
     }
   }
 )
-.plugin(SimpleSortPlugin, ['createdAt', {sortKey: 'u', attributePath: 'updatedAt'}])
+.plugin(SimpleSortPlugin, ['createdAt', { sortKey: 'u', attributePath: 'updatedAt' }])
 .controller();

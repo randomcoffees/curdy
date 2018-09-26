@@ -9,7 +9,7 @@ const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.showAll.find', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.showAll = showAll.find.method(
         SimpleModel,
         'simpleModels',
@@ -33,7 +33,7 @@ describe('curdy.showAll.find', () => {
           })
         ]);
       })
-      .then(simpleModels => {
+      .then((simpleModels) => {
         this.simpleModels = simpleModels;
         this.res = {
           json: utilities.when
@@ -59,7 +59,7 @@ describe('curdy.showAll.find', () => {
   });
 
   describe('a complex find', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.showAll = showAll.find.method(
         SimpleModel,
         'simpleModels',
@@ -99,7 +99,7 @@ describe('curdy.showAll.find', () => {
           })
         ]);
       })
-      .then(simpleModels => {
+      .then((simpleModels) => {
         this.simpleModels = simpleModels;
         this.res = {
           json: utilities.when

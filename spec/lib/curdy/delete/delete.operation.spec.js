@@ -9,7 +9,7 @@ const utilities = require('./../../../../lib/utilities');
 
 describe('curdy.delete.operation', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.delete = _delete.operation.method(
         SimpleModel,
         'simpleModel',
@@ -26,7 +26,7 @@ describe('curdy.delete.operation', () => {
         date: Date.now(),
         boolean: true
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         this.simpleModel = simpleModel;
       });
     });
@@ -38,9 +38,9 @@ describe('curdy.delete.operation', () => {
 
       return this.delete(req, null, utilities.when)
       .then(() => {
-        return SimpleModel.count({_id: this.simpleModel._id});
+        return SimpleModel.count({ _id: this.simpleModel._id });
       })
-      .then(simpleModelCount => {
+      .then((simpleModelCount) => {
         expect(simpleModelCount).to.equal(0);
       });
     });

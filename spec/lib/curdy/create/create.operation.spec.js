@@ -9,7 +9,7 @@ const utilities = require('../../../../lib/utilities');
 
 describe('curdy.create.operation', () => {
   describe('simple models', () => {
-    beforeEach(() =>{
+    beforeEach(() => {
       this.create = create.operation.method(
         SimpleModel,
         'simpleModel',
@@ -32,7 +32,7 @@ describe('curdy.create.operation', () => {
         expect(req.simpleModel._id).to.exist;
         return SimpleModel.findById(req.simpleModel._id);
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         expect(simpleModel.string).to.equal('string');
       });
     });
@@ -49,7 +49,7 @@ describe('curdy.create.operation', () => {
         expect(req.simpleModel._id).to.exist;
         return SimpleModel.findById(req.simpleModel._id);
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         expect(simpleModel.number).to.equal(42);
       });
     });
@@ -66,7 +66,7 @@ describe('curdy.create.operation', () => {
         expect(req.simpleModel._id).to.exist;
         return SimpleModel.findById(req.simpleModel._id);
       })
-      .then(simpleModel => {
+      .then((simpleModel) => {
         expect(simpleModel.boolean).to.equal(true);
       });
     });
