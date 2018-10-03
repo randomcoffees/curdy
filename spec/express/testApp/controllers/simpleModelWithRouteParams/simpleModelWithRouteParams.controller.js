@@ -1,4 +1,4 @@
-const SimpleModel = require('../simpleModel/simpleModel.model');
+const SimpleModel = require('./../../../../models/simpleModel.model');
 const curdy = require('../../../../../index');
 
 Object.assign(

@@ -9,7 +9,7 @@ describe('simpleModel.controller.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
-    this.SimpleModel = require('../../../testApp/controllers/simpleModel/simpleModel.model');
+    this.SimpleModel = require('./../../../../models/simpleModel.model');
 
     return this.SimpleModel.create({
       string: 'string',
