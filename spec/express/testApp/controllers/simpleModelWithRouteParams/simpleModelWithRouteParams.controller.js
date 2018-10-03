@@ -3,7 +3,7 @@ const curdy = require('../../../../../index');
 
 Object.assign(
   module.exports,
-  curdy.generateController(SimpleModel, 'SimpleModel', {
+  curdy.generateController(SimpleModel, {
     find: {
       _id: 'params._id'
     },

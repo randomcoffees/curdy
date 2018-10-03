@@ -3,7 +3,6 @@ const OrderModel = require('./orderedModel.model');
 
 module.exports = curdy.generateController(
   OrderModel,
-  'orderedModel',
   {
     find: {
       _id: 'params._id'

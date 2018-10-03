@@ -5,7 +5,6 @@ const PaginationPlugin = curdy.plugins.pagination;
 
 module.exports = curdy.generateController(
   PaginationModel,
-  'paginationModel',
   {
     find: {
       _id: 'params._id'

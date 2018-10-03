@@ -3,13 +3,13 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
-const expressIntegrationHelper = require('./../../express.integrationHelper');
+const expressIntegrationHelper = require('../../express.integrationHelper');
 
 describe('simpleModel.controller.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
-    this.SimpleModel = require('./../../../testApp/controllers/simpleModel/simpleModel.model');
+    this.SimpleModel = require('../../../testApp/controllers/simpleModel/simpleModel.model');
 
     return this.SimpleModel.create({
       string: 'string',
@@ -98,13 +98,16 @@ describe('simpleModel.controller.integration.spec', () => {
         ]);
       });
     });
+
     it('must render a SimpleModel', () => {
       return request(this.app)
-      .get('/simpleModelWithRouteParams/123')
+      .get('/simpleModelWithRouteParams/1234')
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(1);
-        expect(body[0].string).to.equal('123');
+        expect(body.length).to.equal(2);
+
+        expect(body[0].paramString).to.equal('1234');
+        expect(body[1].paramString).to.equal('1234');
       });
     });
   });
