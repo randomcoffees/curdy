@@ -3,15 +3,15 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const SimpleModel = require('../../../../../models/simpleModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 describe('simpleModel.controller.show.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
-    this.SimpleModel = require('../../../../../models/simpleModel.model');
 
-    return this.SimpleModel.create({
+    return SimpleModel.create({
       string: 'string',
       number: 42,
       date: Date.now(),

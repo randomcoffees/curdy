@@ -3,6 +3,7 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const OrderedModel = require('./../../../../testApp/controllers/plugins/orderBy/orderedModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 const BASE_URI = '/plugins/orderBy/regression';
@@ -11,9 +12,8 @@ describe('orderByRegression.controller.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
-    this.OrderedModel = require('./../../../../testApp/controllers/plugins/orderBy/orderedModel.model');
 
-    return this.OrderedModel.create({
+    return OrderedModel.create({
       name: 'name',
     })
     .then((orderedModel) => {
@@ -32,7 +32,7 @@ describe('orderByRegression.controller.integration.spec', () => {
       .then(({ body }) => {
         expect(body.name).to.equal('not name');
 
-        return this.OrderedModel.findById(body._id);
+        return OrderedModel.findById(body._id);
       })
       .then((orderedModel) => {
         expect(orderedModel.name).to.equal('not name');
@@ -48,7 +48,7 @@ describe('orderByRegression.controller.integration.spec', () => {
       .then(({ body }) => {
         expect(body.success).to.equal(true);
 
-        return this.OrderedModel.count({ _id: this.orderedModel._id });
+        return OrderedModel.count({ _id: this.orderedModel._id });
       })
       .then((orderedModelCount) => {
         expect(orderedModelCount).to.equal(0);
@@ -71,19 +71,19 @@ describe('orderByRegression.controller.integration.spec', () => {
 
   describe('showAll', () => {
     beforeEach(() => {
-      return this.OrderedModel.remove({})
+      return OrderedModel.remove({})
       .then(() => {
         return Promise.all([
-          this.OrderedModel.create({
+          OrderedModel.create({
             name: 'name'
           }),
-          this.OrderedModel.create({
+          OrderedModel.create({
             name: 'not name'
           }),
-          this.OrderedModel.create({
+          OrderedModel.create({
             name: 'not not name'
           }),
-          this.OrderedModel.create({
+          OrderedModel.create({
             name: 'not not not name'
           })
         ]);
@@ -123,7 +123,7 @@ describe('orderByRegression.controller.integration.spec', () => {
         expect(body._id).to.equal(this.orderedModel._id.toString());
         expect(body.name).to.equal('not name');
 
-        return this.OrderedModel.findById(body._id);
+        return OrderedModel.findById(body._id);
       })
       .then((orderedModel) => {
         expect(orderedModel.name).to.equal('not name');

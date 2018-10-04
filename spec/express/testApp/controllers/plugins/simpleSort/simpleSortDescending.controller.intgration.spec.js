@@ -3,6 +3,7 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const SimpleSortModel = require('./../../../../testApp/controllers/plugins/simpleSort/simpleSortModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 const BASE_URI = '/plugins/simpleSort/descending';
@@ -12,24 +13,23 @@ describe('simpleSortDescending.controller.integration.spec', () => {
     const date = new Date();
     expressIntegrationHelper.beforeEach(this);
 
-    this.SimpleSortModel = require('./../../../../testApp/controllers/plugins/simpleSort/simpleSortModel.model');
 
-    return this.SimpleSortModel.remove({})
+    return SimpleSortModel.remove({})
     .then(() => {
       return Promise.all([
-        this.SimpleSortModel.create({
+        SimpleSortModel.create({
           name: 'name',
           createdAt: date.setSeconds(date.getSeconds() - 1)
         }),
-        this.SimpleSortModel.create({
+        SimpleSortModel.create({
           name: 'not name',
           createdAt: date.setSeconds(date.getSeconds() - 2)
         }),
-        this.SimpleSortModel.create({
+        SimpleSortModel.create({
           name: 'not not name',
           createdAt: date.setSeconds(date.getSeconds() - 3)
         }),
-        this.SimpleSortModel.create({
+        SimpleSortModel.create({
           name: 'not not not name',
           createdAt: date.setSeconds(date.getSeconds() - 4)
         })

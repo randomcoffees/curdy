@@ -3,23 +3,23 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const SimpleModel = require('../../../../../models/simpleModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 describe('simpleModel.controller.showAll.integration.spec', () => {
   beforeEach(async () => {
     expressIntegrationHelper.beforeEach(this);
 
-    this.SimpleModel = require('../../../../../models/simpleModel.model');
 
-    await this.SimpleModel.remove({});
+    await SimpleModel.remove({});
     this.simpleModels = await Promise.all([
-      this.SimpleModel.create({
+      SimpleModel.create({
         string: 'string',
         number: 42,
         date: Date.now(),
         boolean: true
       }),
-      this.SimpleModel.create({
+      SimpleModel.create({
         string: 'not string',
         number: 43,
         date: Date.now(),

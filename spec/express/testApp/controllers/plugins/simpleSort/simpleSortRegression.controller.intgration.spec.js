@@ -3,6 +3,7 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const SimpleSortModel = require('./../../../../testApp/controllers/plugins/simpleSort/simpleSortModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 const BASE_URI = '/plugins/simpleSort/regression';
@@ -11,9 +12,8 @@ describe('simpleSortRegression.controller.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
-    this.SimpleSortModel = require('./../../../../testApp/controllers/plugins/simpleSort/simpleSortModel.model');
 
-    return this.SimpleSortModel.create({
+    return SimpleSortModel.create({
       name: 'name',
     })
     .then((simpleSortModel) => {
@@ -32,7 +32,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       .then(({ body }) => {
         expect(body.name).to.equal('not name');
 
-        return this.SimpleSortModel.findById(body._id);
+        return SimpleSortModel.findById(body._id);
       })
       .then((simpleSortModel) => {
         expect(simpleSortModel.name).to.equal('not name');
@@ -48,7 +48,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       .then(({ body }) => {
         expect(body.success).to.equal(true);
 
-        return this.SimpleSortModel.count({ _id: this.simpleSortModel._id });
+        return SimpleSortModel.count({ _id: this.simpleSortModel._id });
       })
       .then((simpleSortModelCount) => {
         expect(simpleSortModelCount).to.equal(0);
@@ -71,19 +71,19 @@ describe('simpleSortRegression.controller.integration.spec', () => {
 
   describe('showAll', () => {
     beforeEach(() => {
-      return this.SimpleSortModel.remove({})
+      return SimpleSortModel.remove({})
       .then(() => {
         return Promise.all([
-          this.SimpleSortModel.create({
+          SimpleSortModel.create({
             name: 'name'
           }),
-          this.SimpleSortModel.create({
+          SimpleSortModel.create({
             name: 'not name'
           }),
-          this.SimpleSortModel.create({
+          SimpleSortModel.create({
             name: 'not not name'
           }),
-          this.SimpleSortModel.create({
+          SimpleSortModel.create({
             name: 'not not not name'
           })
         ]);
@@ -123,7 +123,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
         expect(body._id).to.equal(this.simpleSortModel._id.toString());
         expect(body.name).to.equal('not name');
 
-        return this.SimpleSortModel.findById(body._id);
+        return SimpleSortModel.findById(body._id);
       })
       .then((simpleSortModel) => {
         expect(simpleSortModel.name).to.equal('not name');

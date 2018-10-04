@@ -4,15 +4,15 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const SimpleModel = require('./../../../../../models/simpleModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 describe('simpleModel.controller.create.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
-    this.SimpleModel = require('./../../../../../models/simpleModel.model');
 
-    return this.SimpleModel.create({
+    return SimpleModel.create({
       string: 'string',
       number: 42,
       date: Date.now(),
@@ -37,7 +37,7 @@ describe('simpleModel.controller.create.integration.spec', () => {
       expect(body.number).to.equal(43);
       expect(body.boolean).to.equal(false);
 
-      return this.SimpleModel.findById(body._id);
+      return SimpleModel.findById(body._id);
     })
     .then((simpleModel) => {
       expect(simpleModel.string).to.equal('not string');

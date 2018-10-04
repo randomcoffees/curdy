@@ -3,15 +3,15 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const SimpleModel = require('../../../../../models/simpleModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 describe('simpleModel.controller.patch.integration.spec', () => {
   beforeEach(async () => {
     expressIntegrationHelper.beforeEach(this);
 
-    this.SimpleModel = require('../../../../../models/simpleModel.model');
 
-    this.simpleModel = await this.SimpleModel.create({
+    this.simpleModel = await SimpleModel.create({
       string: 'string',
       number: 42,
       date: Date.now(),
@@ -35,7 +35,7 @@ describe('simpleModel.controller.patch.integration.spec', () => {
     expect(response.body.number).to.equal(42);
     expect(response.body.boolean).to.equal(false);
 
-    const simpleModel = await this.SimpleModel.findById(this.simpleModel._id);
+    const simpleModel = await SimpleModel.findById(this.simpleModel._id);
 
     expect(simpleModel.string).to.equal('not string');
     expect(simpleModel.number).to.equal(42);

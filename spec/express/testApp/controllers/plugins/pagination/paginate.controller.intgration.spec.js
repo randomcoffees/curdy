@@ -3,6 +3,7 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const PaginationModel = require('./../../../../testApp/controllers/plugins/pagination/paginationModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 const BASE_URI = '/plugins/pagination/';
@@ -12,12 +13,11 @@ describe('orderByAscending.controller.integration.spec', () => {
     const date = new Date();
     expressIntegrationHelper.beforeEach(this);
 
-    this.PaginationModel = require('./../../../../testApp/controllers/plugins/pagination/paginationModel.model');
 
-    return this.PaginationModel.remove({})
+    return PaginationModel.remove({})
     .then(() => {
       return Promise.all([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29].map((index) => {
-        return this.PaginationModel.create({
+        return PaginationModel.create({
           name: `name ${index}`,
           createdAt: date.setSeconds(date.getSeconds() - index)
         });

@@ -3,6 +3,7 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
+const OrderedModel = require('./../../../../testApp/controllers/plugins/orderBy/orderedModel.model');
 const expressIntegrationHelper = require('./../../../express.integrationHelper');
 
 const BASE_URI = '/plugins/orderBy/descending';
@@ -12,24 +13,23 @@ describe('orderByDescending.controller.integration.spec', () => {
     const date = new Date();
     expressIntegrationHelper.beforeEach(this);
 
-    this.OrderedModel = require('./../../../../testApp/controllers/plugins/orderBy/orderedModel.model');
 
-    return this.OrderedModel.remove({})
+    return OrderedModel.remove({})
     .then(() => {
       return Promise.all([
-        this.OrderedModel.create({
+        OrderedModel.create({
           name: 'name',
           createdAt: date.setSeconds(date.getSeconds() - 1)
         }),
-        this.OrderedModel.create({
+        OrderedModel.create({
           name: 'not name',
           createdAt: date.setSeconds(date.getSeconds() - 2)
         }),
-        this.OrderedModel.create({
+        OrderedModel.create({
           name: 'not not name',
           createdAt: date.setSeconds(date.getSeconds() - 3)
         }),
-        this.OrderedModel.create({
+        OrderedModel.create({
           name: 'not not not name',
           createdAt: date.setSeconds(date.getSeconds() - 4)
         })
