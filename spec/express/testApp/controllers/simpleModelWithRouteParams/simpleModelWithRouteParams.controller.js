@@ -17,7 +17,7 @@ Object.assign(
       number: 'number',
       string: 'string',
       boolean: 'boolean',
-      paramString: ({ opts }) => opts.req.params.string,
+      paramString: ({ templateOpts }) => templateOpts.req.params.string,
     }
   }, {
     showAll: {
