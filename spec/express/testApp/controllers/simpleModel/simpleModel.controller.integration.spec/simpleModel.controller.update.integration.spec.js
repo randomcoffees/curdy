@@ -27,7 +27,6 @@ describe('simpleModel.controller.update.integration.spec', () => {
       boolean: false
     });
 
-    // console.log({ response });
     expect(response.statusCode).to.equal(200);
 
     expect(response.body._id).to.equal(this.simpleModel._id.toString());
