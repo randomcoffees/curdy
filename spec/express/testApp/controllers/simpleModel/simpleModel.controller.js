@@ -1,9 +1,8 @@
 const curdy = require('./../../../../../index');
-const SimpleModel = require('./simpleModel.model');
+const SimpleModel = require('./../../../../models/simpleModel.model');
 
 module.exports = curdy.generateController(
   SimpleModel, // Model
-  'simpleModel', // Model name
   {
     find: { // Find Template
       _id: 'params._id'

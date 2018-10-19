@@ -4,9 +4,9 @@
   "description": "Generate CRUD controllers for your express application!",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R spec --recursive \"./spec/**/*.spec.js\" --exit --timeout 120000",
+    "test": "./node_modules/.bin/mocha -R spec --recursive \"./{,!(node_modules)/**}/*.spec.js\" --exit --timeout 120000",
     "test:watch": "npm test -- --watch",
-    "test:debug": "./node_modules/.bin/mocha --inspect --debug-brk -R spec --recursive \"./spec/**/*.spec.js\" --exit",
+    "test:debug": "./node_modules/.bin/mocha --inspect --debug-brk -R spec --recursive \"./{,!(node_modules)/**}/*.spec.js\" --exit",
     "test:debug:watch": "npm run test:debug -- --watch",
     "test:lint": "./node_modules/.bin/eslint .",
     "test:coverage": "./node_modules/.bin/nyc --reporter=html --reporter=text npm test",
@@ -43,7 +43,8 @@
   },
   "dependencies": {
     "express": "^4.16.3",
-    "jyson": "^3.1.2",
+    "jyson": "^4.0.0",
+    "lodash.camelcase": "^4.3.0",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.1",
     "lodash.set": "^4.3.2"

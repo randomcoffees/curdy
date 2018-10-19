@@ -4,7 +4,6 @@ const OrderByPlugin = curdy.plugins.orderBy;
 
 module.exports = curdy.generateController(
   OrderModel,
-  'orderedModel',
   {
     find: {
       _id: 'params._id'

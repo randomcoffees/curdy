@@ -3,7 +3,6 @@ const SimpleSort = require('./simpleSortModel.model');
 
 module.exports = curdy.generateController(
   SimpleSort,
-  'simpleSort',
   {
     find: {
       _id: 'params._id'

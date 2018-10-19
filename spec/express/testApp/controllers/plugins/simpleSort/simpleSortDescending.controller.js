@@ -4,7 +4,6 @@ const SimpleSortPlugin = curdy.plugins.simpleSort;
 
 module.exports = curdy.generateController(
   SimpleSortModel,
-  'simpleSortModel',
   {
     find: {
       _id: 'params._id'

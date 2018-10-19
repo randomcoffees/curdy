@@ -38,7 +38,6 @@ const SimpleModel = require('./simpleModel.model');
 
 module.exports = curdy.generateController(
   SimpleModel, // Model
-  'simpleModel', // Model name
   {
     find: { // Find Template
       _id: 'params._id'

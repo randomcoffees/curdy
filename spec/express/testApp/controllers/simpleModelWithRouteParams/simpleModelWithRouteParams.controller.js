@@ -1,9 +1,9 @@
-const SimpleModel = require('../simpleModel/simpleModel.model');
+const SimpleModel = require('./../../../../models/simpleModel.model');
 const curdy = require('../../../../../index');
 
 Object.assign(
   module.exports,
-  curdy.generateController(SimpleModel, 'SimpleModel', {
+  curdy.generateController(SimpleModel, {
     find: {
       _id: 'params._id'
     },
@@ -17,7 +17,7 @@ Object.assign(
       number: 'number',
       string: 'string',
       boolean: 'boolean',
-      paramString: ({ opts }) => opts.req.params.string,
+      paramString: ({ templateOpts }) => templateOpts.req.params.string,
     }
   }, {
     showAll: {

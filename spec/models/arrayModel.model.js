@@ -1,24 +1,24 @@
 const mongoose = require('mongoose');
 
-delete mongoose.models.NestedModel;
+delete mongoose.models.ArrayModel;
 
-module.exports = mongoose.model('NestedModel', new mongoose.Schema({
+module.exports = mongoose.model('ArrayModel', new mongoose.Schema({
   string: String,
   number: Number,
   date: Date,
   boolean: Boolean,
-  child: {
+  list: [{
     string: String,
     number: Number,
     date: Date,
     boolean: Boolean,
-    child: {
+    list: [{
       string: String,
       number: Number,
       date: Date,
       boolean: Boolean
-    }
-  }
+    }]
+  }]
 }, {
   timestamps: true,
 }));
