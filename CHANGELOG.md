@@ -1,5 +1,11 @@
 # Curdy changelog
 
+## next
+- Updates to jyson 4.0.0
+- models are now stored on `req.curdy` instead of just the `req`
+- Arrays are now marked as dirty
+  - As a result updating an array of subdocuments behaves differently than an array of strings
+
 ## v3.4.0
 - Removed dependency on Q
 - Removed dependency on lodash

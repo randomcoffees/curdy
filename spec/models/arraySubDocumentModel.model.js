@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-delete mongoose.models.ArrayModel;
+delete mongoose.models.ArraySubDocumentModel;
 
-module.exports = mongoose.model('ArrayModel', new mongoose.Schema({
+module.exports = mongoose.model('ArraySubDocumentModel', new mongoose.Schema({
   string: String,
   number: Number,
   date: Date,
