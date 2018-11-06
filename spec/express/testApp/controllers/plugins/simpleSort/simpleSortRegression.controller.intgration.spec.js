@@ -30,9 +30,9 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       })
       .expect(201)
       .then(({ body }) => {
-        expect(body.name).to.equal('not name');
+        expect(body.simpleSortModel.name).to.equal('not name');
 
-        return SimpleSortModel.findById(body._id);
+        return SimpleSortModel.findById(body.simpleSortModel._id);
       })
       .then((simpleSortModel) => {
         expect(simpleSortModel.name).to.equal('not name');
@@ -46,7 +46,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       .delete(`${BASE_URI}/${this.simpleSortModel._id}`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.success).to.equal(true);
+        expect(body.simpleSortModel.success).to.equal(true);
 
         return SimpleSortModel.count({ _id: this.simpleSortModel._id });
       })
@@ -62,7 +62,7 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       .get(`${BASE_URI}/${this.simpleSortModel._id}`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.string).to.equal(this.simpleSortModel.string);
+        expect(body.simpleSortModel.string).to.equal(this.simpleSortModel.string);
         expect(body.number).to.equal(this.simpleSortModel.number);
         expect(body.boolean).to.equal(this.simpleSortModel.boolean);
       });
@@ -98,9 +98,9 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       .get(`${BASE_URI}/`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(this.simpleSortModels.length);
+        expect(body.simpleSortModels.length).to.equal(this.simpleSortModels.length);
         this.simpleSortModels.forEach((simpleSortModel) => {
-          expect(body).to.deep.contain({
+          expect(body.simpleSortModels).to.deep.contain({
             _id: simpleSortModel._id.toString(),
             name: simpleSortModel.name,
             createdAt: simpleSortModel.createdAt.toISOString(),
@@ -120,10 +120,10 @@ describe('simpleSortRegression.controller.integration.spec', () => {
       })
       .expect(200)
       .then(({ body }) => {
-        expect(body._id).to.equal(this.simpleSortModel._id.toString());
-        expect(body.name).to.equal('not name');
+        expect(body.simpleSortModel._id).to.equal(this.simpleSortModel._id.toString());
+        expect(body.simpleSortModel.name).to.equal('not name');
 
-        return SimpleSortModel.findById(body._id);
+        return SimpleSortModel.findById(body.simpleSortModel._id);
       })
       .then((simpleSortModel) => {
         expect(simpleSortModel.name).to.equal('not name');

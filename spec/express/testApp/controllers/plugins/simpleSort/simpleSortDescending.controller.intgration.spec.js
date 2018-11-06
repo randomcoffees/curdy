@@ -48,8 +48,8 @@ describe('simpleSortDescending.controller.integration.spec', () => {
       .get(`${BASE_URI}/`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(this.simpleSortModels.length);
-        expect(body).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
+        expect(body.simpleSortModels.length).to.equal(this.simpleSortModels.length);
+        expect(body.simpleSortModels).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
           return {
             _id: simpleSortModel._id.toString(),
             name: simpleSortModel.name,
@@ -68,8 +68,8 @@ describe('simpleSortDescending.controller.integration.spec', () => {
         .get(`${BASE_URI}/?sort=createdAt:asc`)
         .expect(200)
         .then(({ body }) => {
-          expect(body.length).to.equal(this.simpleSortModels.length);
-          expect(body).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
+          expect(body.simpleSortModels.length).to.equal(this.simpleSortModels.length);
+          expect(body.simpleSortModels).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
             return {
               _id: simpleSortModel._id.toString(),
               name: simpleSortModel.name,
@@ -85,8 +85,8 @@ describe('simpleSortDescending.controller.integration.spec', () => {
         .get(`${BASE_URI}/?sort=createdAt:desc`)
         .expect(200)
         .then(({ body }) => {
-          expect(body.length).to.equal(this.simpleSortModels.length);
-          expect(body).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
+          expect(body.simpleSortModels.length).to.equal(this.simpleSortModels.length);
+          expect(body.simpleSortModels).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
             return {
               _id: simpleSortModel._id.toString(),
               name: simpleSortModel.name,
@@ -110,8 +110,8 @@ describe('simpleSortDescending.controller.integration.spec', () => {
           .get(`${BASE_URI}/?sort=u:asc`)
           .expect(200)
           .then(({ body }) => {
-            expect(body.length).to.equal(this.simpleSortModels.length);
-            expect(body).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
+            expect(body.simpleSortModels.length).to.equal(this.simpleSortModels.length);
+            expect(body.simpleSortModels).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
               return {
                 _id: simpleSortModel._id.toString(),
                 name: simpleSortModel.name,
@@ -127,8 +127,8 @@ describe('simpleSortDescending.controller.integration.spec', () => {
           .get(`${BASE_URI}/?sort=u:desc`)
           .expect(200)
           .then(({ body }) => {
-            expect(body.length).to.equal(this.simpleSortModels.length);
-            expect(body).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
+            expect(body.simpleSortModels.length).to.equal(this.simpleSortModels.length);
+            expect(body.simpleSortModels).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
               return {
                 _id: simpleSortModel._id.toString(),
                 name: simpleSortModel.name,
@@ -146,8 +146,8 @@ describe('simpleSortDescending.controller.integration.spec', () => {
           .get(`${BASE_URI}/?sort=name:asc`)
           .expect(200)
           .then(({ body }) => {
-            expect(body.length).to.equal(this.simpleSortModels.length);
-            expect(body).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
+            expect(body.simpleSortModels.length).to.equal(this.simpleSortModels.length);
+            expect(body.simpleSortModels).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
               return {
                 _id: simpleSortModel._id.toString(),
                 name: simpleSortModel.name,
@@ -163,8 +163,8 @@ describe('simpleSortDescending.controller.integration.spec', () => {
           .get(`${BASE_URI}/?sort=name:desc`)
           .expect(200)
           .then(({ body }) => {
-            expect(body.length).to.equal(this.simpleSortModels.length);
-            expect(body).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
+            expect(body.simpleSortModels.length).to.equal(this.simpleSortModels.length);
+            expect(body.simpleSortModels).to.deep.equal(this.simpleSortModels.map((simpleSortModel) => {
               return {
                 _id: simpleSortModel._id.toString(),
                 name: simpleSortModel.name,

@@ -47,7 +47,8 @@
     "lodash.camelcase": "^4.3.0",
     "lodash.get": "^4.4.2",
     "lodash.merge": "^4.6.1",
-    "lodash.set": "^4.3.2"
+    "lodash.set": "^4.3.2",
+    "pluralize": "^7.0.0"
   },
   "nyc": {
     "exclude": "**/*.spec.js"

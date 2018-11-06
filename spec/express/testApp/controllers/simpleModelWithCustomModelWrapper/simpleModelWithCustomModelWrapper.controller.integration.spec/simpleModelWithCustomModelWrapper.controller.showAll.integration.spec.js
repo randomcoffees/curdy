@@ -4,9 +4,9 @@ const request = require('supertest');
 const expect = chai.expect;
 
 const SimpleModel = require('../../../../../models/simpleModel.model');
-const expressIntegrationHelper = require('./../../../express.integrationHelper');
+const expressIntegrationHelper = require('../../../express.integrationHelper');
 
-describe('simpleModel.controller.showAll.integration.spec', () => {
+describe('simpleModelWithCustomModelWrapper.controller.showAll.integration.spec', () => {
   beforeEach(async () => {
     expressIntegrationHelper.beforeEach(this);
 
@@ -30,12 +30,12 @@ describe('simpleModel.controller.showAll.integration.spec', () => {
 
   it('must render a SimpleModel', async () => {
     const response = await request(this.app)
-    .get('/simpleModel');
+    .get('/simpleModelWithCustomModelWrapper');
 
     expect(response.statusCode).to.equal(200);
-    expect(response.body.simpleModels.length).to.equal(this.simpleModels.length);
+    expect(response.body.simpleModelWithCustomModelWrapperz.length).to.equal(this.simpleModels.length);
     this.simpleModels.forEach((simpleModel) => {
-      expect(response.body.simpleModels).to.deep.contain({
+      expect(response.body.simpleModelWithCustomModelWrapperz).to.deep.contain({
         _id: simpleModel._id.toString(),
         string: simpleModel.string,
         number: simpleModel.number,

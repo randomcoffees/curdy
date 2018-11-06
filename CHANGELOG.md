@@ -5,6 +5,9 @@
 - models are now stored on `req.curdy` instead of just the `req`
 - Arrays are now marked as dirty
   - As a result updating an array of subdocuments behaves differently than an array of strings
+- Wraps api model render data in the model name
+  - Show, Create, Delete, and Update use the singular name
+  - ShowAll uses the plural name
 
 ## v3.4.0
 - Removed dependency on Q

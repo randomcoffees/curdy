@@ -4,9 +4,9 @@ const request = require('supertest');
 const expect = chai.expect;
 
 const SimpleModel = require('../../../../../models/simpleModel.model');
-const expressIntegrationHelper = require('./../../../express.integrationHelper');
+const expressIntegrationHelper = require('../../../express.integrationHelper');
 
-describe('simpleModel.controller.show.integration.spec', () => {
+describe('simpleModelWithCustomModelWrapper.controller.show.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
@@ -24,12 +24,12 @@ describe('simpleModel.controller.show.integration.spec', () => {
 
   it('must render a SimpleModel', () => {
     return request(this.app)
-    .get(`/simpleModel/${this.simpleModel._id}`)
+    .get(`/simpleModelWithCustomModelWrapper/${this.simpleModel._id}`)
     .expect(200)
     .then(({ body }) => {
-      expect(body.simpleModel.string).to.equal(this.simpleModel.string);
-      expect(body.simpleModel.number).to.equal(this.simpleModel.number);
-      expect(body.simpleModel.boolean).to.equal(this.simpleModel.boolean);
+      expect(body.simpleModelWithCustomModelWrapper.string).to.equal(this.simpleModel.string);
+      expect(body.simpleModelWithCustomModelWrapper.number).to.equal(this.simpleModel.number);
+      expect(body.simpleModelWithCustomModelWrapper.boolean).to.equal(this.simpleModel.boolean);
     });
   });
 });

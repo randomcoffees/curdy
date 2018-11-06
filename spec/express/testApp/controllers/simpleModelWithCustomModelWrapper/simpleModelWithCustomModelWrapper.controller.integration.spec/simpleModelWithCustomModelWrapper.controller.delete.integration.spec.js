@@ -5,9 +5,9 @@ const request = require('supertest');
 const expect = chai.expect;
 
 const SimpleModel = require('../../../../../models/simpleModel.model');
-const expressIntegrationHelper = require('./../../../express.integrationHelper');
+const expressIntegrationHelper = require('../../../express.integrationHelper');
 
-describe('simpleModel.controller.delete.integration.spec', () => {
+describe('simpleModelWithCustomModelWrapper.controller.delete.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
@@ -25,10 +25,10 @@ describe('simpleModel.controller.delete.integration.spec', () => {
 
   it('must delete a SimpleModel', () => {
     return request(this.app)
-    .delete(`/simpleModel/${this.simpleModel._id}`)
+    .delete(`/simpleModelWithCustomModelWrapper/${this.simpleModel._id}`)
     .expect(200)
     .then(({ body }) => {
-      expect(body.simpleModel.success).to.equal(true);
+      expect(body.simpleModelWithCustomModelWrapper.success).to.equal(true);
 
       return SimpleModel.count({ _id: this.simpleModel._id });
     })

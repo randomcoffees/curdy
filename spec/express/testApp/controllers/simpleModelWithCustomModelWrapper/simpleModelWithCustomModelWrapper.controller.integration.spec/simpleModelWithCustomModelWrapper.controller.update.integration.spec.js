@@ -6,7 +6,7 @@ const expect = chai.expect;
 const SimpleModel = require('../../../../../models/simpleModel.model');
 const expressIntegrationHelper = require('../../../express.integrationHelper');
 
-describe('simpleModel.controller.update.integration.spec', () => {
+describe('simpleModelWithCustomModelWrapper.controller.update.integration.spec', () => {
   beforeEach(async () => {
     expressIntegrationHelper.beforeEach(this);
 
@@ -21,7 +21,7 @@ describe('simpleModel.controller.update.integration.spec', () => {
 
   it('must update a SimpleModel', async () => {
     const response = await request(this.app)
-    .put(`/simpleModel/${this.simpleModel._id}`)
+    .put(`/simpleModelWithCustomModelWrapper/${this.simpleModel._id}`)
     .send({
       string: 'not string',
       boolean: false
@@ -29,10 +29,10 @@ describe('simpleModel.controller.update.integration.spec', () => {
 
     expect(response.statusCode).to.equal(200);
 
-    expect(response.body.simpleModel._id).to.equal(this.simpleModel._id.toString());
-    expect(response.body.simpleModel.string).to.equal('not string');
-    expect(response.body.simpleModel.number).to.equal(42);
-    expect(response.body.simpleModel.boolean).to.equal(false);
+    expect(response.body.simpleModelWithCustomModelWrapper._id).to.equal(this.simpleModel._id.toString());
+    expect(response.body.simpleModelWithCustomModelWrapper.string).to.equal('not string');
+    expect(response.body.simpleModelWithCustomModelWrapper.number).to.equal(42);
+    expect(response.body.simpleModelWithCustomModelWrapper.boolean).to.equal(false);
 
     const simpleModel = await SimpleModel.findById(this.simpleModel._id);
 

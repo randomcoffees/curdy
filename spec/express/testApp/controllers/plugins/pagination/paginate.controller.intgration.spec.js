@@ -36,8 +36,8 @@ describe('orderByAscending.controller.integration.spec', () => {
       .get(`${BASE_URI}/`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(20);
-        expect(body).to.deep.equal(this.paginationModels.slice(0, 20).map((orderedModel) => {
+        expect(body.paginationModels.length).to.equal(20);
+        expect(body.paginationModels).to.deep.equal(this.paginationModels.slice(0, 20).map((orderedModel) => {
           return {
             _id: orderedModel._id.toString(),
             name: orderedModel.name,
@@ -53,8 +53,8 @@ describe('orderByAscending.controller.integration.spec', () => {
       .get(`${BASE_URI}/?skip=2`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(20);
-        expect(body).to.deep.equal(this.paginationModels.slice(2, 22).map((orderedModel) => {
+        expect(body.paginationModels.length).to.equal(20);
+        expect(body.paginationModels).to.deep.equal(this.paginationModels.slice(2, 22).map((orderedModel) => {
           return {
             _id: orderedModel._id.toString(),
             name: orderedModel.name,
@@ -70,8 +70,8 @@ describe('orderByAscending.controller.integration.spec', () => {
       .get(`${BASE_URI}/?limit=2`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(2);
-        expect(body).to.deep.equal(this.paginationModels.slice(0, 2).map((orderedModel) => {
+        expect(body.paginationModels.length).to.equal(2);
+        expect(body.paginationModels).to.deep.equal(this.paginationModels.slice(0, 2).map((orderedModel) => {
           return {
             _id: orderedModel._id.toString(),
             name: orderedModel.name,
@@ -87,8 +87,8 @@ describe('orderByAscending.controller.integration.spec', () => {
       .get(`${BASE_URI}/?limit=2`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(2);
-        expect(body).to.deep.equal(this.paginationModels.slice(0, 2).map((orderedModel) => {
+        expect(body.paginationModels.length).to.equal(2);
+        expect(body.paginationModels).to.deep.equal(this.paginationModels.slice(0, 2).map((orderedModel) => {
           return {
             _id: orderedModel._id.toString(),
             name: orderedModel.name,
@@ -105,8 +105,8 @@ describe('orderByAscending.controller.integration.spec', () => {
         .get(`${BASE_URI}/?sort=createdAt:asc`)
         .expect(200)
         .then(({ body }) => {
-          expect(body.length).to.equal(20);
-          expect(body).to.deep.equal(this.paginationModels.slice(0, 20).map((orderedModel) => {
+          expect(body.paginationModels.length).to.equal(20);
+          expect(body.paginationModels).to.deep.equal(this.paginationModels.slice(0, 20).map((orderedModel) => {
             return {
               _id: orderedModel._id.toString(),
               name: orderedModel.name,
@@ -124,8 +124,8 @@ describe('orderByAscending.controller.integration.spec', () => {
         .get(`${BASE_URI}/?sort=createdAt:desc`)
         .expect(200)
         .then(({ body }) => {
-          expect(body.length).to.equal(20);
-          expect(body).to.deep.equal(this.paginationModels.slice(0, 20).map((orderedModel) => {
+          expect(body.paginationModels.length).to.equal(20);
+          expect(body.paginationModels).to.deep.equal(this.paginationModels.slice(0, 20).map((orderedModel) => {
             return {
               _id: orderedModel._id.toString(),
               name: orderedModel.name,

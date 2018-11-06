@@ -4,10 +4,10 @@ const request = require('supertest');
 
 const expect = chai.expect;
 
-const SimpleModel = require('./../../../../../models/simpleModel.model');
-const expressIntegrationHelper = require('./../../../express.integrationHelper');
+const SimpleModel = require('../../../../../models/simpleModel.model');
+const expressIntegrationHelper = require('../../../express.integrationHelper');
 
-describe('simpleModel.controller.create.integration.spec', () => {
+describe('simpleModelWithCustomModelWrapper.controller.create.integration.spec', () => {
   beforeEach(() => {
     expressIntegrationHelper.beforeEach(this);
 
@@ -25,7 +25,7 @@ describe('simpleModel.controller.create.integration.spec', () => {
 
   it('must create a SimpleModel', () => {
     return request(this.app)
-    .post('/simpleModel')
+    .post('/simpleModelWithCustomModelWrapper')
     .send({
       string: 'not string',
       number: 43,
@@ -33,11 +33,11 @@ describe('simpleModel.controller.create.integration.spec', () => {
     })
     .expect(201)
     .then(({ body }) => {
-      expect(body.simpleModel.string).to.equal('not string');
-      expect(body.simpleModel.number).to.equal(43);
-      expect(body.simpleModel.boolean).to.equal(false);
+      expect(body.simpleModelWithCustomModelWrapper.string).to.equal('not string');
+      expect(body.simpleModelWithCustomModelWrapper.number).to.equal(43);
+      expect(body.simpleModelWithCustomModelWrapper.boolean).to.equal(false);
 
-      return SimpleModel.findById(body.simpleModel._id);
+      return SimpleModel.findById(body.simpleModelWithCustomModelWrapper._id);
     })
     .then((simpleModel) => {
       expect(simpleModel.string).to.equal('not string');
