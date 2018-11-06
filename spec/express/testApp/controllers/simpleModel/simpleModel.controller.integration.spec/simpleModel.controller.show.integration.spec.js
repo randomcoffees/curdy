@@ -27,9 +27,9 @@ describe('simpleModel.controller.show.integration.spec', () => {
     .get(`/simpleModel/${this.simpleModel._id}`)
     .expect(200)
     .then(({ body }) => {
-      expect(body.string).to.equal(this.simpleModel.string);
-      expect(body.number).to.equal(this.simpleModel.number);
-      expect(body.boolean).to.equal(this.simpleModel.boolean);
+      expect(body.simpleModel.string).to.equal(this.simpleModel.string);
+      expect(body.simpleModel.number).to.equal(this.simpleModel.number);
+      expect(body.simpleModel.boolean).to.equal(this.simpleModel.boolean);
     });
   });
 });

@@ -33,11 +33,11 @@ describe('simpleModel.controller.create.integration.spec', () => {
     })
     .expect(201)
     .then(({ body }) => {
-      expect(body.string).to.equal('not string');
-      expect(body.number).to.equal(43);
-      expect(body.boolean).to.equal(false);
+      expect(body.simpleModel.string).to.equal('not string');
+      expect(body.simpleModel.number).to.equal(43);
+      expect(body.simpleModel.boolean).to.equal(false);
 
-      return SimpleModel.findById(body._id);
+      return SimpleModel.findById(body.simpleModel._id);
     })
     .then((simpleModel) => {
       expect(simpleModel.string).to.equal('not string');

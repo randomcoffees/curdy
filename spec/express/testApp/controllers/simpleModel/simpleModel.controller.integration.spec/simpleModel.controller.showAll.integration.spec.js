@@ -33,9 +33,9 @@ describe('simpleModel.controller.showAll.integration.spec', () => {
     .get('/simpleModel');
 
     expect(response.statusCode).to.equal(200);
-    expect(response.body.length).to.equal(this.simpleModels.length);
+    expect(response.body.simpleModels.length).to.equal(this.simpleModels.length);
     this.simpleModels.forEach((simpleModel) => {
-      expect(response.body).to.deep.contain({
+      expect(response.body.simpleModels).to.deep.contain({
         _id: simpleModel._id.toString(),
         string: simpleModel.string,
         number: simpleModel.number,

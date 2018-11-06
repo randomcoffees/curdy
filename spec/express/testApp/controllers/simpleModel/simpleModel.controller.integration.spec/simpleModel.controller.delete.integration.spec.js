@@ -28,7 +28,7 @@ describe('simpleModel.controller.delete.integration.spec', () => {
     .delete(`/simpleModel/${this.simpleModel._id}`)
     .expect(200)
     .then(({ body }) => {
-      expect(body.success).to.equal(true);
+      expect(body.simpleModel.success).to.equal(true);
 
       return SimpleModel.count({ _id: this.simpleModel._id });
     })

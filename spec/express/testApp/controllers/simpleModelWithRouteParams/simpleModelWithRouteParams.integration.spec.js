@@ -33,12 +33,12 @@ describe('simpleModel.controller.integration.spec', () => {
       .expect(201)
       .then(({ body }) => {
 
-        expect(body.string).to.equal('123');
-        expect(body.paramString).to.equal('123');
-        expect(body.number).to.equal(43);
-        expect(body.boolean).to.equal(false);
+        expect(body.simpleModel.string).to.equal('123');
+        expect(body.simpleModel.paramString).to.equal('123');
+        expect(body.simpleModel.number).to.equal(43);
+        expect(body.simpleModel.boolean).to.equal(false);
 
-        return SimpleModel.findById(body._id);
+        return SimpleModel.findById(body.simpleModel._id);
       })
       .then((simpleModel) => {
         expect(simpleModel.string).to.equal('123');
@@ -54,7 +54,7 @@ describe('simpleModel.controller.integration.spec', () => {
       .delete(`/simpleModelWithRouteParams/123/${this.simpleModel._id}`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.success).to.equal(true);
+        expect(body.simpleModel.success).to.equal(true);
 
         return SimpleModel.count({ _id: this.simpleModel._id });
       })
@@ -70,10 +70,10 @@ describe('simpleModel.controller.integration.spec', () => {
       .get(`/simpleModelWithRouteParams/asd/${this.simpleModel._id}`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.string).to.equal(this.simpleModel.string);
-        expect(body.paramString).to.equal('asd');
-        expect(body.number).to.equal(this.simpleModel.number);
-        expect(body.boolean).to.equal(this.simpleModel.boolean);
+        expect(body.simpleModel.string).to.equal(this.simpleModel.string);
+        expect(body.simpleModel.paramString).to.equal('asd');
+        expect(body.simpleModel.number).to.equal(this.simpleModel.number);
+        expect(body.simpleModel.boolean).to.equal(this.simpleModel.boolean);
       });
     });
   });
@@ -104,10 +104,10 @@ describe('simpleModel.controller.integration.spec', () => {
       .get('/simpleModelWithRouteParams/1234')
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(2);
+        expect(body.simpleModels.length).to.equal(2);
 
-        expect(body[0].paramString).to.equal('1234');
-        expect(body[1].paramString).to.equal('1234');
+        expect(body.simpleModels[0].paramString).to.equal('1234');
+        expect(body.simpleModels[1].paramString).to.equal('1234');
       });
     });
   });
@@ -124,12 +124,12 @@ describe('simpleModel.controller.integration.spec', () => {
       })
       .expect(200)
       .then(({ body }) => {
-        expect(body._id).to.equal(this.simpleModel._id.toString());
-        expect(body.string).to.equal(newString);
-        expect(body.number).to.equal(43);
-        expect(body.boolean).to.equal(false);
+        expect(body.simpleModel._id).to.equal(this.simpleModel._id.toString());
+        expect(body.simpleModel.string).to.equal(newString);
+        expect(body.simpleModel.number).to.equal(43);
+        expect(body.simpleModel.boolean).to.equal(false);
 
-        return SimpleModel.findById(body._id);
+        return SimpleModel.findById(body.simpleModel._id);
       })
       .then((simpleModel) => {
         expect(simpleModel.string).to.equal(newString);

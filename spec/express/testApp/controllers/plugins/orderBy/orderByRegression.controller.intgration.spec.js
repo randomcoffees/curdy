@@ -30,9 +30,9 @@ describe('orderByRegression.controller.integration.spec', () => {
       })
       .expect(201)
       .then(({ body }) => {
-        expect(body.name).to.equal('not name');
+        expect(body.orderedModel.name).to.equal('not name');
 
-        return OrderedModel.findById(body._id);
+        return OrderedModel.findById(body.orderedModel._id);
       })
       .then((orderedModel) => {
         expect(orderedModel.name).to.equal('not name');
@@ -46,7 +46,7 @@ describe('orderByRegression.controller.integration.spec', () => {
       .delete(`${BASE_URI}/${this.orderedModel._id}`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.success).to.equal(true);
+        expect(body.orderedModel.success).to.equal(true);
 
         return OrderedModel.count({ _id: this.orderedModel._id });
       })
@@ -98,9 +98,9 @@ describe('orderByRegression.controller.integration.spec', () => {
       .get(`${BASE_URI}/`)
       .expect(200)
       .then(({ body }) => {
-        expect(body.length).to.equal(this.orderedModels.length);
+        expect(body.orderedModels.length).to.equal(this.orderedModels.length);
         this.orderedModels.forEach((orderedModel) => {
-          expect(body).to.deep.contain({
+          expect(body.orderedModels).to.deep.contain({
             _id: orderedModel._id.toString(),
             name: orderedModel.name,
             createdAt: orderedModel.createdAt.toISOString(),
@@ -120,10 +120,10 @@ describe('orderByRegression.controller.integration.spec', () => {
       })
       .expect(200)
       .then(({ body }) => {
-        expect(body._id).to.equal(this.orderedModel._id.toString());
-        expect(body.name).to.equal('not name');
+        expect(body.orderedModel._id).to.equal(this.orderedModel._id.toString());
+        expect(body.orderedModel.name).to.equal('not name');
 
-        return OrderedModel.findById(body._id);
+        return OrderedModel.findById(body.orderedModel._id);
       })
       .then((orderedModel) => {
         expect(orderedModel.name).to.equal('not name');

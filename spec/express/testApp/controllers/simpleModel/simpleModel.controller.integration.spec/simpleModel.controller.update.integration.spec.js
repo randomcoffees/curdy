@@ -29,10 +29,10 @@ describe('simpleModel.controller.update.integration.spec', () => {
 
     expect(response.statusCode).to.equal(200);
 
-    expect(response.body._id).to.equal(this.simpleModel._id.toString());
-    expect(response.body.string).to.equal('not string');
-    expect(response.body.number).to.equal(42);
-    expect(response.body.boolean).to.equal(false);
+    expect(response.body.simpleModel._id).to.equal(this.simpleModel._id.toString());
+    expect(response.body.simpleModel.string).to.equal('not string');
+    expect(response.body.simpleModel.number).to.equal(42);
+    expect(response.body.simpleModel.boolean).to.equal(false);
 
     const simpleModel = await SimpleModel.findById(this.simpleModel._id);
 
