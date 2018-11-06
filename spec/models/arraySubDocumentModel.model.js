@@ -7,18 +7,18 @@ module.exports = mongoose.model('ArraySubDocumentModel', new mongoose.Schema({
   number: Number,
   date: Date,
   boolean: Boolean,
-  list: [{
+  list: [new mongoose.Schema({
     string: String,
     number: Number,
     date: Date,
     boolean: Boolean,
-    list: [{
+    list: [new mongoose.Schema({
       string: String,
       number: Number,
       date: Date,
       boolean: Boolean
-    }]
-  }]
+    })]
+  })]
 }, {
   timestamps: true,
 }));
