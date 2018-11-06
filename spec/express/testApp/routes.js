@@ -9,5 +9,6 @@ module.exports = function(app) {
   app.use('/helloWorld', require('./controllers/helloWorld'));
   app.use('/simpleModel', require('./controllers/simpleModel'));
   app.use('/simpleModelWithRouteParams', require('./controllers/simpleModelWithRouteParams'));
+  app.use('/simpleModelWithCustomModelWrapper', require('./controllers/simpleModelWithCustomModelWrapper'));
   app.use('/plugins', require('./controllers/plugins'));
 };
